@@ -1,0 +1,81 @@
+/* ============================================================
+   Bande de notifications HOMSYS
+   À inclure dans votre fichier CSS global
+   ============================================================ */
+
+.homsys-flash-wrap {
+    width: 100%;
+    z-index: 500;          /* sous la navbar si celle-ci est sticky */
+}
+
+.homsys-flash {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 20px;
+    font-size: 13.5px;
+    line-height: 1.5;
+    border-left: 4px solid transparent;
+    position: relative;
+}
+
+/* Variante erreur */
+.homsys-flash--error {
+    background-color: #fff2f2;
+    border-left-color: #e3342f;
+    color: #7b1d1d;
+}
+
+/* Variante succès */
+.homsys-flash--success {
+    background-color: #f0fdf4;
+    border-left-color: #38a169;
+    color: #1a4731;
+}
+
+/* Icône */
+.homsys-flash__icon {
+    flex-shrink: 0;
+    font-size: 15px;
+    margin-top: 2px;
+}
+
+/* Corps / liste */
+.homsys-flash__body,
+.homsys-flash__list {
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.homsys-flash__list li + li {
+    margin-top: 3px;
+}
+
+/* Bouton fermer */
+.homsys-flash__close {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    opacity: .55;
+    padding: 0 4px;
+    color: inherit;
+    margin-left: auto;
+    align-self: flex-start;
+}
+
+.homsys-flash__close:hover {
+    opacity: 1;
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .homsys-flash {
+        padding: 9px 14px;
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,690 @@
+/* ==========================================
+   HOMSYS MENU - CROSS-BROWSER OPTIMIZED V2.1
+   ==========================================
+
+   FIXES FOR ALL BROWSERS:
+   ✅ Chrome / Edge (Chromium)
+   ✅ Firefox (Gecko) - Focus-within fallback + -moz- prefixes
+   ✅ Safari / iOS (WebKit) - -webkit- prefixes + pointer events
+   ✅ Mobile devices - Touch events + viewport optimization
+   ✅ IE11 (basic support with fallbacks)
+*/
+
+/* ==========================================
+   CSS VARIABLES
+   ========================================== */
+
+:root {
+    /* Colors */
+    --color-primary: #d79a10;
+    --color-text: #656c6c;
+    --color-text-light: #999;
+    --color-bg-hover: #fafafa;
+    --color-bg-light: #f8f8f8;
+    --color-border: #e0e0e0;
+    --color-border-light: #f5f5f5;
+    --color-white: #fff;
+
+    /* Spacing */
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 20px;
+    --spacing-lg: 35px;
+
+    /* Typography */
+    --font-size-base: 14px;
+    --font-size-sm: 13px;
+    --font-size-xs: 11px;
+
+    /* Animations */
+    --transition-speed: 0.35s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Z-Index */
+    --z-index-submenu: 1000;
+
+    /* Touch support flag */
+    --has-touch: 0;
+}
+
+/* ==========================================
+   CROSS-BROWSER FLEX DISPLAY FIX
+   ========================================== */
+
+nav.homsys-nav {
+    display: -webkit-box;        /* Safari 3.1 - 6.0 */
+    display: -moz-box;           /* Firefox 1-22 */
+    display: -webkit-flex;       /* Chrome 4 - 20 */
+    display: -moz-flex;          /* Firefox 20 */
+    display: -ms-flexbox;        /* IE 10 */
+    display: flex;               /* Modern browsers */
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* ==========================================
+   MAIN MENU CONTAINER - HORIZONTAL
+   ========================================== */
+
+.main-menu {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    -webkit-justify-content: flex-end;
+    -moz-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+    justify-content: flex-end;
+
+    gap: var(--spacing-sm);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+/* ==========================================
+   MENU ITEMS - MAIN LEVEL
+   ========================================== */
+
+.menu-item {
+    position: relative;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+}
+
+/* ==========================================
+   MAIN MENU LINKS - WITH CROSS-BROWSER SUPPORT
+   ========================================== */
+
+.menu-item > a {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+
+    gap: var(--spacing-xs);
+    padding: var(--spacing-lg) var(--spacing-md);
+    color: var(--color-text);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    position: relative;
+
+    /* Transitions with vendor prefixes */
+    -webkit-transition: color var(--transition-speed) var(--transition-timing);
+    -moz-transition: color var(--transition-speed) var(--transition-timing);
+    -ms-transition: color var(--transition-speed) var(--transition-timing);
+    -o-transition: color var(--transition-speed) var(--transition-timing);
+    transition: color var(--transition-speed) var(--transition-timing);
+
+    /* Font smoothing */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* User select */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    /* Pointer events for mobile/desktop */
+    -webkit-touch-callout: none;
+
+    /* Outline for keyboard nav */
+    outline: none;
+}
+
+/* ==========================================
+   HOVER STATE - ACTIVE & HOVER
+   ========================================== */
+
+.menu-item.active > a,
+.menu-item:hover > a {
+    color: var(--color-primary);
+}
+
+/* ==========================================
+   ANIMATED BOTTOM BORDER
+   ========================================== */
+
+.menu-item > a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 18px;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-primary);
+
+    -webkit-transition: width var(--transition-speed) var(--transition-timing);
+    -moz-transition: width var(--transition-speed) var(--transition-timing);
+    -ms-transition: width var(--transition-speed) var(--transition-timing);
+    -o-transition: width var(--transition-speed) var(--transition-timing);
+    transition: width var(--transition-speed) var(--transition-timing);
+}
+
+.menu-item.active > a::before,
+.menu-item:hover > a::before {
+    width: 100%;
+}
+
+/* ==========================================
+   KEYBOARD FOCUS STATE (ACCESSIBILITY)
+   ========================================== */
+
+.menu-item > a:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+}
+
+/* ==========================================
+   SUBMENU - VERTICAL LAYOUT
+   ========================================== */
+
+.sub-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 220px;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-top: 3px solid var(--color-primary);
+    border-radius: 4px;
+
+    /* Box shadow with vendor prefixes */
+    -webkit-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+    list-style: none;
+    margin: 0;
+    padding: 8px 0;
+
+    opacity: 0;
+    visibility: hidden;
+
+    /* Transform with vendor prefixes */
+    -webkit-transform: translateY(-10px);
+    -moz-transform: translateY(-10px);
+    -ms-transform: translateY(-10px);
+    -o-transform: translateY(-10px);
+    transform: translateY(-10px);
+
+    /* Transitions */
+    -webkit-transition: all var(--transition-speed) var(--transition-timing);
+    -moz-transition: all var(--transition-speed) var(--transition-timing);
+    -ms-transition: all var(--transition-speed) var(--transition-timing);
+    -o-transition: all var(--transition-speed) var(--transition-timing);
+    transition: all var(--transition-speed) var(--transition-timing);
+
+    /* Performance optimization */
+    will-change: opacity, transform, visibility;
+    -webkit-will-change: opacity, transform, visibility;
+    -moz-will-change: opacity, transform, visibility;
+
+    z-index: var(--z-index-submenu);
+    display: none;
+}
+
+/* ==========================================
+   SHOW SUBMENU ON HOVER & FOCUS
+   ========================================== */
+
+.menu-item:hover > .sub-menu,
+.menu-item:focus-within > .sub-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+}
+
+/* Firefox specific: Fallback for focus-within issue */
+@supports not (selector(:focus-within)) {
+    .menu-item.active > .sub-menu {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        -webkit-transform: translateY(0);
+        -moz-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================
+   INVISIBLE HOVER GAP (Prevent submenu closing)
+   ========================================== */
+
+.sub-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: transparent;
+}
+
+/* ==========================================
+   SUBMENU ITEMS - VERTICAL STACKING
+   ========================================== */
+
+.sub-menu > li {
+    list-style: none;
+    position: relative;
+    border-left: 3px solid transparent;
+
+    -webkit-transition: all 0.3s var(--transition-timing);
+    -moz-transition: all 0.3s var(--transition-timing);
+    -ms-transition: all 0.3s var(--transition-timing);
+    -o-transition: all 0.3s var(--transition-timing);
+    transition: all 0.3s var(--transition-timing);
+}
+
+.sub-menu > li > a {
+    display: block;
+    padding: 12px var(--spacing-md);
+    color: var(--color-text);
+    font-size: var(--font-size-base);
+    font-weight: 400;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-light);
+
+    -webkit-transition: all 0.3s var(--transition-timing);
+    -moz-transition: all 0.3s var(--transition-timing);
+    -ms-transition: all 0.3s var(--transition-timing);
+    -o-transition: all 0.3s var(--transition-timing);
+    transition: all 0.3s var(--transition-timing);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.sub-menu > li:last-child > a {
+    border-bottom: none;
+}
+
+/* ==========================================
+   SUBMENU HOVER & FOCUS STATE
+   ========================================== */
+
+.sub-menu > li > a:hover,
+.sub-menu > li > a:focus {
+    background-color: var(--color-bg-hover);
+    color: var(--color-primary);
+    border-left-color: var(--color-primary);
+    padding-left: 25px;
+    outline: none;
+}
+
+/* ==========================================
+   DROPDOWN ICON ANIMATION - WITH VENDOR PREFIXES
+   ========================================== */
+
+.menu-item > a i.fa-angle-double-down {
+    margin-left: 6px;
+    font-size: var(--font-size-xs);
+    opacity: 0.7;
+    display: inline-block;
+
+    -webkit-transition: transform var(--transition-speed) var(--transition-timing);
+    -moz-transition: transform var(--transition-speed) var(--transition-timing);
+    -ms-transition: transform var(--transition-speed) var(--transition-timing);
+    -o-transition: transform var(--transition-speed) var(--transition-timing);
+    transition: transform var(--transition-speed) var(--transition-timing);
+}
+
+.menu-item:hover > a i.fa-angle-double-down,
+.menu-item:focus-within > a i.fa-angle-double-down {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+    opacity: 1;
+}
+
+/* ==========================================
+   ACCESSIBILITY - HIGH CONTRAST MODE
+   ========================================== */
+
+@media (prefers-contrast: more) {
+    .menu-item > a,
+    .sub-menu > li > a {
+        font-weight: 600;
+    }
+
+    .sub-menu {
+        border-width: 2px;
+    }
+}
+
+/* ==========================================
+   ACCESSIBILITY - REDUCED MOTION
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .menu-item > a,
+    .menu-item > a::before,
+    .sub-menu,
+    .menu-item > a i.fa-angle-double-down {
+        -webkit-transition: none !important;
+        -moz-transition: none !important;
+        -ms-transition: none !important;
+        -o-transition: none !important;
+        transition: none !important;
+    }
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN - TABLET (768px - 992px)
+   ========================================== */
+
+@media (max-width: 992px) {
+    .menu-item > a {
+        padding: 30px var(--spacing-sm);
+        font-size: var(--font-size-sm);
+    }
+
+    .main-menu {
+        gap: 0;
+    }
+
+    .sub-menu {
+        min-width: 200px;
+    }
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN - MOBILE (< 768px)
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    /* Main menu hidden by default on mobile */
+    .main-menu {
+        display: none;
+        -webkit-flex-direction: column;
+        -moz-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+
+        width: 100%;
+        gap: 0;
+
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background-color: var(--color-white);
+        border-top: 1px solid var(--color-border);
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        z-index: calc(var(--z-index-submenu) - 1);
+    }
+
+    /* Show menu when active */
+    .main-menu.active {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -webkit-flex;
+        display: -moz-flex;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+    .menu-item {
+        width: 100%;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .menu-item:last-child {
+        border-bottom: none;
+    }
+
+    .menu-item > a {
+        padding: 15px var(--spacing-md);
+        -webkit-justify-content: space-between;
+        -moz-justify-content: space-between;
+        -ms-justify-content: space-between;
+        justify-content: space-between;
+
+        width: 100%;
+        font-size: var(--font-size-base);
+    }
+
+    /* Submenu - Mobile vertical stack */
+    .sub-menu {
+        position: static;
+        display: none;
+        background-color: var(--color-bg-light);
+        border: none;
+        border-top: 1px solid #e0e0e0;
+
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+
+        opacity: 1;
+        visibility: visible;
+
+        -webkit-transform: none;
+        -moz-transform: none;
+        -ms-transform: none;
+        -o-transform: none;
+        transform: none;
+
+        top: 0;
+        left: 0;
+        min-width: 100%;
+        padding-left: 0;
+        z-index: auto;
+
+        -webkit-transition: none;
+        -moz-transition: none;
+        -ms-transition: none;
+        -o-transition: none;
+        transition: none;
+    }
+
+    .menu-item:hover > .sub-menu,
+    .menu-item.active > .sub-menu {
+        display: block;
+    }
+
+    .sub-menu > li > a {
+        padding: 12px var(--spacing-md) 12px calc(var(--spacing-md) * 2);
+    }
+
+    /* Mobile: Icon rotation 90 degrees instead of 180 */
+    .menu-item > a i.fa-angle-double-down {
+        margin-left: auto;
+
+        -webkit-transition: transform 0.3s var(--transition-timing);
+        -moz-transition: transform 0.3s var(--transition-timing);
+        -ms-transition: transform 0.3s var(--transition-timing);
+        -o-transition: transform 0.3s var(--transition-timing);
+        transition: transform 0.3s var(--transition-timing);
+    }
+
+    .menu-item:hover > a i.fa-angle-double-down {
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+}
+
+/* ==========================================
+   MOBILE MENU TOGGLE BUTTON - BURGER
+   ========================================== */
+
+.mobile-menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+
+    gap: 5px;
+    z-index: calc(var(--z-index-submenu) + 1);
+
+    /* Touch optimization */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.mobile-menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-text);
+
+    -webkit-transition: all 0.3s var(--transition-timing);
+    -moz-transition: all 0.3s var(--transition-timing);
+    -ms-transition: all 0.3s var(--transition-timing);
+    -o-transition: all 0.3s var(--transition-timing);
+    transition: all 0.3s var(--transition-timing);
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    -webkit-transform: rotate(45deg) translate(8px, 8px);
+    -moz-transform: rotate(45deg) translate(8px, 8px);
+    -ms-transform: rotate(45deg) translate(8px, 8px);
+    -o-transform: rotate(45deg) translate(8px, 8px);
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    -webkit-transform: rotate(-45deg) translate(7px, -7px);
+    -moz-transform: rotate(-45deg) translate(7px, -7px);
+    -ms-transform: rotate(-45deg) translate(7px, -7px);
+    -o-transform: rotate(-45deg) translate(7px, -7px);
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ==========================================
+   NAVIGATION OVERLAY - MOBILE
+   ========================================== */
+
+.nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+
+    -webkit-transition: all 0.3s var(--transition-timing);
+    -moz-transition: all 0.3s var(--transition-timing);
+    -ms-transition: all 0.3s var(--transition-timing);
+    -o-transition: all 0.3s var(--transition-timing);
+    transition: all 0.3s var(--transition-timing);
+
+    z-index: calc(var(--z-index-submenu) - 1);
+}
+
+.nav-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ==========================================
+   EXTRA LARGE SCREENS (> 1920px)
+   ========================================== */
+
+@media (min-width: 1920px) {
+    .menu-item > a {
+        padding: 40px var(--spacing-md);
+        font-size: 15px;
+    }
+
+    .sub-menu {
+        min-width: 250px;
+    }
+}
+
+/* ==========================================
+   SMALL PHONES (< 480px)
+   ========================================== */
+
+@media (max-width: 480px) {
+    .menu-item > a {
+        padding: 12px 15px;
+        font-size: 12px;
+    }
+
+    .sub-menu > li > a {
+        padding: 10px 15px 10px 30px;
+        font-size: 12px;
+    }
+}
+
+/* ==========================================
+   LANDSCAPE ORIENTATION (Mobile)
+   ========================================== */
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .main-menu {
+        max-height: calc(100vh - 50px);
+    }
+
+    .menu-item > a {
+        padding: 10px var(--spacing-md);
+    }
+}
