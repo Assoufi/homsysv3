@@ -32,7 +32,12 @@ class HomeController extends Controller
         $nb_offres         = Offre::count() + 1000;
         $nb_cv             = Candidature::count() + 10000;
         $nb_clients        = 163;
-        return view('index', compact('lastest_offres', 'nb_offres', 'nb_cv', 'nb_clients'));
+        $meta = [
+            'title' => 'Offres emploi IT freelance & CDI au Maroc | HOMSYS',
+            'description' => 'Trouvez les meilleures offres d\'emploi IT freelance, CDI, CDD et stage au Maroc. Développeurs, DBA, chefs de projets — postulez sur homsys.ma',
+            'created_at' => Carbon::now(),
+        ];
+        return view('index', compact('lastest_offres', 'nb_offres', 'nb_cv', 'nb_clients', 'meta'));
     }
 
     public function about()
@@ -40,7 +45,7 @@ class HomeController extends Controller
          $nb_offres         = Offre::count() + 1000;
         $nb_cv             = Candidature::count() + 10000;
         $nb_clients        = 163;
-        $meta = ['title' => 'HOMSYS : A PROPOS DE NOUS', 'description' => 'HOMSYS : A PROPOS DE NOUS', 'created_at' => Carbon::now()];
+        $meta = ['title' => 'À propos | HOMSYS - Cabinet de recrutement IT au Maroc', 'description' => 'HOMSYS, cabinet de recrutement spécialisé en IT au Maroc depuis 2009. Expertise, transparence et accompagnement personnalisé.', 'created_at' => Carbon::now()];
         return view('about', compact('nb_offres', 'nb_cv', 'nb_clients', 'meta'));
     }
 

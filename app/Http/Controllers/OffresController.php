@@ -28,23 +28,19 @@ class OffresController extends Controller
 
     public function index()
     {
-        $this->forget(['keyword', 'ville', 'type']);
-        $query = Offre::where('exp_offre', 0);
-
-        $offre_news = (clone $query)->orderBy('updated_at', 'desc')->take(5)->get();
-        Session::put('offres', $offre_news);
         $user = Auth::user();
-
 
         if (!empty($user) && $user->hasRole('admin')) {
             $offres = Offre::orderBy('updated_at', 'desc')->paginate(10);
             $meta   = ['title' => 'Gestion des offres de missions IT HOMSYS', 'description' => 'Gestion des offres et missions IT HOMSYS', 'created_at' => Carbon::now()];
             return view('offres.index', compact('offres', 'meta'));
         }
-        $nb_offres = $query->count();
-        $offres    = $query->orderBy('updated_at', 'desc')->paginate();
-        $meta      = ['title' => 'Liste des offres de missions IT HOMSYS', 'description' => 'Offres et missions IT HOMSYS', 'created_at' => Carbon::now()];
-        return view('offres.index_candidat', compact('offres', 'nb_offres', 'meta'));
+
+        $nb_offres = Offre::where('exp_offre', 0)->count();
+        $offres_news = Offre::where('exp_offre', 0)->orderBy('updated_at', 'desc')->take(5)->get();
+        $meta = ['title' => 'Offres emploi IT freelance & CDI au Maroc | HOMSYS', 'description' => 'Trouvez les meilleures offres d\'emploi IT freelance, CDI, CDD et stage au Maroc sur HOMSYS', 'created_at' => Carbon::now()];
+
+        return view('offres.index_candidat', compact('nb_offres', 'offres_news', 'meta'));
     }
 
 
@@ -174,63 +170,18 @@ class OffresController extends Controller
 
 
     public function search(Request $request)
-
     {
+        $keyword = $request->input('keyword', '');
+        $ville = $request->input('ville', '');
+        $type = $request->input('type', '');
 
+        $meta = [
+            'title' => 'Recherche d\'offres IT | HOMSYS',
+            'description' => 'Recherche d\'offres d\'emploi IT freelance, CDI, CDD et stage au Maroc sur HOMSYS',
+            'created_at' => Carbon::now(),
+        ];
 
-
-        $keyword = $this->getParamWithSession('keyword');
-
-        $ville   = $this->getParamWithSession('ville');
-
-        $type    = $this->getParamWithSession('type');
-
-
-
-        $query = Offre::whereNotNull('id_offre');
-
-
-
-        if (Request::has('keyword')) {
-
-
-
-            $query = $query->where(function ($query) use ($keyword) {
-
-                // Everything within this closure will be grouped together
-
-                $query->where('titre_offre', 'LIKE', '%' . $keyword . '%')
-
-                    ->orWhere('description_offre', 'LIKE', '%' . $keyword . '%');
-
-            });
-
-
-
-        }
-
-        if (Request::has('ville')) {
-
-            $query = $query->where('ville_offre', 'LIKE', '%' . $ville . '%');
-
-        }
-
-        if (Request::has('type')) {
-
-            $query = $query->where('type_offre', $type);
-
-        }
-
-        $nb_offres = $query->count();
-
-        $offres    = $query->orderBy('created_at', 'desc')->paginate();
-
-        $search    = true;
-
-        $meta      = ['title' => 'Liste des offres HOMSYS', 'description' => 'Offres et missions IT HOMSYS', 'created_at' => Carbon::now()];
-
-        return view('offres.index_candidat', compact('offres', 'nb_offres', 'search', 'keyword', 'ville', 'type', 'meta'));
-
+        return view('offres.index_candidat', compact('keyword', 'ville', 'type', 'meta'));
     }
 
 

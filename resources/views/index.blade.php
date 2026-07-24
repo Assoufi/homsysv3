@@ -71,21 +71,21 @@
             <div class="homsys-blog homsys-blog-grid">
               <ul class="row">
                 <li class="col-md-4">
-                  <figure><a href="#"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Réussir son entretien d'embauche" loading="lazy"></a></figure>
+                  <figure><a href="#"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"></a></figure>
                   <div class="homsys-blog-grid-text">                
                     <h2><a href="{{ url('/article1') }}">Comment réussir son entretien d’embauche : conseils pratiques</a></h2>                    
                     <p>Un entretien d'embauche est une étape cruciale dans la recherche d'emploi. Pour maximiser vos chances de succès, une bonne préparation est essentielle. Voici nos conseils pratiques pour aborder sereinement cette rencontre et faire la meilleure impression possible.</p>
                     <a href="{{ url('/article1') }}" class="homsys-read-more homsys-bgcolor">Lire la suite</a> </div>
                 </li>
                 <li class="col-md-4">
-                  <figure><a href="#"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="conseils indispensables pour un CV percutant" loading="lazy"></a></figure>
+                  <figure><a href="#"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="conseils indispensables pour un CV percutant"></a></figure>
                   <div class="homsys-blog-grid-text">                    
                     <h2><a href="{{ url('/article2') }}">10 conseils indispensables pour un CV percutant</a></h2>                    
                     <p>Vous avez déjà postulé à plusieurs annonces, pour différentes missions et différents secteurs d’activité, mais vos candidatures ne se sont jamais concrétisées ? Et si cela venait de votre CV ? Voici 10 recommandations pour éviter les pièges les plus "classiques", les faux pas, et présenter un CV bien construit. </p>
                     <a href="{{ url('/article2') }}" class="homsys-read-more homsys-bgcolor">Lire la suite</a> </div>
                 </li>
                 <li class="col-md-4">
-                  <figure><a href="#"><img src="{{ URL::asset('img/mode_travail_freelance.jpg')}}" alt="Avantages du freelance" loading="lazy"></a></figure>
+                  <figure><a href="#"><img src="{{ URL::asset('img/mode_travail_freelance.jpg')}}" alt="Avantages du freelance"></a></figure>
                   <div class="homsys-blog-grid-text">                    
                     <h2><a href="{{ url('/article3') }}">Les avantages que ne connaissent pas les développeurs en CDI</a></h2>                    
                     <p>Etre développeur est une chance incroyable. Enfin, la chance n’est que la rencontre entre le travail et l’opportunité, n’est-ce pas ? Ainsi, rien ne vous empêche de vivre pleinement votre vie de développeur. Développeurs web, mobile, logiciel, front-end, back-end, full-stack... exploitez-vous réellement au maximum le potentiel de votre métier ? </p>
@@ -107,7 +107,7 @@
               <a href="{{ url('mails/contactus') }}" class="homsys-static-btn homsys-bgcolor"><span>Contactez-nous</span></a> </div>
           </aside>
           <aside class="col-md-6 homsys-typo-wrap">
-            <div class="homsys-logo-thumb"><img src="{{ URL::asset('img/references.jpg')}}" alt="Nos références clients" loading="lazy"></div>
+            <div class="homsys-logo-thumb"><img src="{{ URL::asset('img/references.jpg')}}" alt="references"></div>
           </aside>
         </div>
       </div>

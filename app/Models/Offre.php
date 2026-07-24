@@ -20,12 +20,24 @@ class Offre extends Model
     'competences', 
     'qualites',
     'client',
-    'contact'];
+    'contact',
+    'experience',
+    'formation'];
 
     protected $primaryKey = 'id_offre';
 
     public function getDatePublication()
     {
         return isset($this->attributes['created_at']) ? Carbon::parse($this->attributes['created_at'])->format('d/m/Y') : 'N/A';
+    }
+
+    public function candidatures()
+    {
+        return $this->hasMany(Candidature::class, 'offre_id');
+    }
+
+    public function visites()
+    {
+        return $this->hasMany(Visite::class, 'id_offre');
     }
 }

@@ -80,7 +80,7 @@ class MailController extends Controller
             'disponibilite' => 'required|max:100',
             //'g-recaptcha-response' => 'required|recaptcha',
         ];
-        if (false && empty(Request::get('g-recaptcha-response'))) {
+        if (empty(Request::get('g-recaptcha-response'))) {
             $rules = array_merge($rules, $recaptchaRules);
         }
 
@@ -145,7 +145,7 @@ class MailController extends Controller
         /*foreach (Request::all() as $key => $value) { 
         \Log::info($key . ' =>' . $value);
         }*/
-        if (false && empty(Request::get('g-recaptcha-response'))) {
+        if (empty(Request::get('g-recaptcha-response'))) {
             Request::session()->flash('captcha', 'Il faut valider l\'envoi par le captcha');
             return redirect('/#contact');
         } else {

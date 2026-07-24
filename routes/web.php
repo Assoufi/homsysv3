@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CandidatController;
 use App\Http\Controllers\CvController;
 use App\Http\Controllers\HomeController;
@@ -23,6 +24,10 @@ Route::post('/logout', function () {
     Session::flush();
     return redirect('/logins');
 })->name('logout');
+
+Route::get('/article1', [ArticleController::class, 'article1']);
+Route::get('/article2', [ArticleController::class, 'article2']);
+Route::get('/article3', [ArticleController::class, 'article3']);
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 

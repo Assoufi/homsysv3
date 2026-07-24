@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Offre;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
 
 class SitemapController extends Controller
 {
@@ -13,25 +14,34 @@ class SitemapController extends Controller
         $baseUrl = rtrim(config('app.url'), '/');
 
         $urls = [];
-        $urls[] = [
-            'loc' => $baseUrl . '/',
-            'changefreq' => 'weekly',
-            'priority' => '1.0',
-        ];
-        $urls[] = [
-            'loc' => $baseUrl . '/offres',
-            'changefreq' => 'daily',
-            'priority' => '0.9',
+
+        // Static pages
+        $staticPages = [
+            '/' => ['changefreq' => 'weekly', 'priority' => '1.0'],
+            '/offres' => ['changefreq' => 'daily', 'priority' => '0.9'],
+            '/about' => ['changefreq' => 'monthly', 'priority' => '0.6'],
+            '/portage' => ['changefreq' => 'monthly', 'priority' => '0.5'],
+            '/mails/contactus' => ['changefreq' => 'monthly', 'priority' => '0.5'],
+            '/candidats/spontane' => ['changefreq' => 'monthly', 'priority' => '0.7'],
         ];
 
-        $offres = Offre::where('exp_offre', 0)->orderBy('updated_at', 'desc')->get(['id_offre', 'updated_at']);
+        foreach ($staticPages as $path => $config) {
+            $urls[] = array_merge(['loc' => $baseUrl . $path], $config);
+        }
+
+        // Job listings
+        $offres = Offre::where('exp_offre', 0)
+            ->orderBy('updated_at', 'desc')
+            ->get(['id_offre', 'titre_offre', 'updated_at']);
+
         foreach ($offres as $offre) {
+            $slug = Str::slug($offre->titre_offre);
             $lastmod = null;
             if (!empty($offre->updated_at)) {
                 $lastmod = Carbon::parse($offre->updated_at)->toAtomString();
             }
             $urls[] = [
-                'loc' => $baseUrl . '/offres/' . $offre->id_offre,
+                'loc' => $baseUrl . '/offres/' . $offre->id_offre . '-' . $slug,
                 'lastmod' => $lastmod,
                 'changefreq' => 'weekly',
                 'priority' => '0.7',
@@ -55,4 +65,3 @@ class SitemapController extends Controller
         return Response::make($xml, 200, ['Content-Type' => 'application/xml; charset=UTF-8']);
     }
 }
-

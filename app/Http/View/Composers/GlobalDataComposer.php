@@ -35,6 +35,16 @@ class GlobalDataComposer
         });
         $view->with('offres_news', $offres_news);
 
+        $villes = Cache::remember('shared.offres.villes', 300, function () {
+            return Offre::where('exp_offre', 0)
+                ->distinct()
+                ->pluck('ville_offre')
+                ->filter()
+                ->sort()
+                ->values();
+        });
+        $view->with('villes', $villes);
+
         try {
             $visites_offre = Cache::remember('shared.stats.visites_offre', 300, function () {
                 // vistes_offre seems like a typo in original code, but I'll keep it as is or fix it if I'm sure

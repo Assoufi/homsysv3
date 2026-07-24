@@ -10,33 +10,39 @@
 
 
 
-        <form method="POST" action="/offres/search" class="homsys-banner-search">
-          @csrf
+        <form method="GET" action="{{ url('offres/search') }}" class="homsys-banner-search">
 
           <ul>
 
             <li>
 
-              <input type="text" name="keyword" placeholder="Intitulé, Mot clé, .." value="{{ isset($keyword) ? $keyword : '' }}">
+              <input type="text" name="keyword" placeholder="Intitulé, compétences, poste..." value="{{ request('keyword', '') }}">
 
             </li>
 
             <li>
 
-              <input type="text" name="ville" placeholder="Ville" value="{{ isset($ville) ? $ville : '' }}">
+              <input type="text" name="ville" placeholder="Ville" value="{{ request('ville', '') }}" list="banner-villes">
+              <datalist id="banner-villes">
+                @isset($villes)
+                  @foreach($villes as $v)
+                    <option value="{{ $v }}">
+                  @endforeach
+                @endisset
+              </datalist>
 
-              <i class="homsys-icon homsys-location"></i> </li>
+            </li>
 
             <li>
 
               <div class="homsys-select-style">
 
                  <select name="type">
-                   <option value="">Type Contrat</option>
-                   <option value="Freelance" {{ isset($type) && $type === 'Freelance' ? 'selected' : '' }}>Freelance</option>
-                   <option value="CDI" {{ isset($type) && $type === 'CDI' ? 'selected' : '' }}>CDI</option>
-                   <option value="CDD" {{ isset($type) && $type === 'CDD' ? 'selected' : '' }}>CDD</option>
-                   <option value="Stage" {{ isset($type) && $type === 'Stage' ? 'selected' : '' }}>Stage</option>
+                   <option value="">Tous les types</option>
+                   <option value="Freelance" {{ request('type') === 'Freelance' ? 'selected' : '' }}>Freelance</option>
+                   <option value="CDI" {{ request('type') === 'CDI' ? 'selected' : '' }}>CDI</option>
+                   <option value="CDD" {{ request('type') === 'CDD' ? 'selected' : '' }}>CDD</option>
+                   <option value="Stage" {{ request('type') === 'Stage' ? 'selected' : '' }}>Stage</option>
                  </select>
 
               </div>
@@ -45,9 +51,11 @@
 
             <li class="homsys-banner-submit">
 
-              <input type="submit" value="">
+              <button type="submit" class="homsys-banner-search-btn">
+                <i class="fa fa-search"></i> Rechercher
+              </button>
 
-              <i class="homsys-icon homsys-search"></i> </li>
+            </li>
 
           </ul>
 

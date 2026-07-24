@@ -125,6 +125,25 @@
             var currentLength = $(this).val().length;
             $('#charCount').text((maxLength - currentLength) + ' caractères restants');
         });
+
+        if ($.fn.fileinput) {
+            $("#cv").fileinput({
+                showUpload: false,
+                maxFileSize: 1024,
+                allowedFileTypes: ['pdf', 'doc', 'docx'],
+                theme: 'fa',
+                language: 'fr',
+                browseClass: 'btn btn-outline-secondary',
+                removeClass: 'btn btn-outline-danger',
+                browseLabel: 'Parcourir',
+                removeLabel: 'Retirer'
+            });
+        }
+
+        $('form').on('submit', function() {
+            var $btn = $(this).find('button[type="submit"]');
+            $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Envoi en cours...');
+        });
     });
 </script>
 @stop
