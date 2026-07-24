@@ -30,7 +30,7 @@
 
                   <div class="homsys-blog-grid-text">
 
-                    <h2>Les avantages que ne connaissent pas les développeurs en CDI</h2>
+                    <h2>Reconversion professionnelle à 30, 40 ou 50 ans : les stratégies qui fonctionnent aujourd'hui</h2>
 
                     <ul class="homsys-blog-grid-option">
 
@@ -38,23 +38,31 @@
 
                       <li>
 
-                        <time datetime="2020-10-26 20:00">12 Octobre 2020</time>
+                        <time datetime="2026-07-24 20:00">24 Juillet 2026</time>
 
                       </li>
 
                     </ul>
 
-                    <p>Être développeur est une chance incroyable. Enfin, la chance n'est que la rencontre entre le travail et l'opportunité, n'est-ce pas ? Ainsi, rien ne vous empêche de vivre pleinement votre vie de développeur.</p>
+                    <p>Les transitions de carrière sont de plus en plus fréquentes face aux mutations technologiques rapides. Loin des clichés sur l'âge, cet article aborde les étapes concrètes pour réussir un changement de métier à tout âge.</p>
 
-                    <p>Développeurs web, mobile, logiciel, front-end, back-end, full-stack... exploitez-vous réellement au maximum le potentiel de votre métier ? Beaucoup de développeurs en CDI ignorent les nombreux avantages que leur statut peut leur offrir.</p>
+                    <h3>Le mythe de l'âge limite</h3>
 
-                    <p>La stabilité financière est sans doute le premier avantage. Un salaire fixe chaque mois permet de mieux planifier ses projets de vie : achat immobilier, épargne, projets familiaux. Cette sécurité est particulièrement précieuse dans un secteur où la concurrence est forte.</p>
+                    <p>Les recruteurs se concentrent de plus en plus sur les compétences transférables plutôt que sur l'âge. Une expérience de 15 ans dans la gestion de projet vaut de l'or, quel que soit le secteur visé. L'essentiel est de savoir raconter son parcours comme une force, pas comme un frein.</p>
 
-                    <p>Les formations continues sont souvent prises en charge par l'employeur. Que ce soit pour apprendre une nouvelle technologie, obtenir une certification ou participer à des conférences, le CDI vous donne accès à un budget formation que vous n'auriez peut-être pas en freelance.</p>
+                    <h3>Les compétences transférables : votre meilleur atout</h3>
 
-                    <p>La mutuelle santé, les congés payés, les primes d'intéressement et de participation constituent autant d'avantages sociaux qui améliorent significativement votre pouvoir d'achat et votre qualité de vie.</p>
+                    <p>Identifiez ce que vous savez faire et qui peut servir dans un autre métier : management, négociation, analyse de données, relation client. Ces compétences sont souvent plus valorisées que les connaissances techniques spécifiques à un secteur.</p>
 
-                    <p>Enfin, le réseau professionnel que vous construisez au sein d'une entreprise peut être précieux. Vous travaillez avec des équipes, participez à des projets ambitieux et développez des compétences que vous n'auriez peut-être pas eu l'occasion d'acquérir seul.</p>
+                    <h3>Les formations qui ont la cote en 2026</h3>
+
+                    <p>Les bootcamps intensifs en développement web, data science ou cybersécurité restent des passages privilégiés. Pour des métiers plus réglementés, les formations certifiantes (RNCP, titre professionnel) offrent une reconnaissance rapide. N'hésitez pas à utiliser votre CPF ou à négocier une période de formation dans votre dossier de reconversion.</p>
+
+                    <h3>Construire son réseau progressivement</h3>
+
+                    <p>Participez à des meetups, des conférences et des groupes LinkedIn dans votre nouveau domaine. Informez votre entourage professionnel de votre projet : beaucoup d'opportunités naissent de recommandations informelles. Un mentor dans le secteur visé peut considérablement accélérer votre intégration.</p>
+
+                    <p>La reconversion n'est pas un saut dans le vide, mais une transition stratégique. Avec une préparation solide et une bonne connaissance du marché, l'âge devient un atout : celui de la maturité et de la fiabilité.</p>
 
                   </div>
 
