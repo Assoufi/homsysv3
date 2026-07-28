@@ -12,16 +12,15 @@
                     <div class="homsys-column-12">
                         <div class="homsys-typo-wrap">
                             <div class="homsys-jobdetail-content homsys-apply-form-container">
-                                <div class="homsys-content-title">
-                                    <h2>Postuler à l'offre : {{$offre->titre_offre}}</h2>
-                                    <p class="homsys-form-subtitle">Complétez le formulaire ci-dessous pour soumettre votre candidature.</p>
-                                </div>
-
                                 <form action="{{ url('mails/postul') }}" method="POST" enctype="multipart/form-data" class="homsys-modern-form">
                                     @csrf
                                     <input type="hidden" name="id_offre" value="{{$offre->id_offre}}">
 
                                     <div class="row">
+                                        <div class="col-md-12">
+                                            <h2>Postuler à l'offre : {{$offre->titre_offre}}</h2>
+                                            <p class="homsys-form-subtitle">Complétez le formulaire ci-dessous pour soumettre votre candidature.</p>
+                                        </div>
                                         <div class="col-md-6">
                                             <div class="form-group {{ $errors->has('nom') ? 'has-error' : '' }}">
                                                 <label for="nom" class="required">Votre nom et prénom</label>

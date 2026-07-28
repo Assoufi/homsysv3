@@ -65,24 +65,13 @@ class MailController extends Controller
         /*foreach (Request::all() as $key => $value) {
         \Log::info($key . ' =>' . $value);
         }*/
-        /*if (empty(Request::get('g-recaptcha-response'))) {
-        Request::session()->flash('g-recaptcha-response', 'Le champ recaptcha est invalide !');
-        return redirect()->back()->withInput(Request::except('_token'));
-        }*/
-        $recaptchaRules = [
-            'g-recaptcha-response' => 'required|recaptcha',
-        ];
         $rules = [
             'cv'            => 'required|mimes:doc,docx,pdf|max:2048',
             'email'         => 'required|email',
             'nom'           => 'required|max:100',
             'tjm'           => 'required|numeric',
             'disponibilite' => 'required|max:100',
-            //'g-recaptcha-response' => 'required|recaptcha',
         ];
-        if (empty(Request::get('g-recaptcha-response'))) {
-            $rules = array_merge($rules, $recaptchaRules);
-        }
 
         $validator = Validator::make(Request::all(), $rules);
         if ($validator->fails()) {
