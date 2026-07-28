@@ -206,4 +206,74 @@ class OffresController extends Controller
 
     }
 
+    public function linkedinPost($id)
+    {
+        $offre = Offre::findOrFail($id);
+
+        $title    = $offre->titre_offre ?? '';
+        $type     = $offre->type_offre ?? '';
+        $location = $offre->ville_offre ?? '';
+        $duration = $offre->duree ?? '';
+        $exp_yrs  = $offre->experience ?? '';
+        $profil   = trim(strip_tags($offre->profil ?? ''));
+        $skills   = trim(strip_tags($offre->competences ?? ''));
+        $poste    = trim(strip_tags($offre->poste ?? ''));
+        $details  = trim(strip_tags($offre->description_offre ?? ''));
+        $url      = url('offres/' . $offre->id_offre);
+
+        $intro   = "🚀 **NOUVELLE OPPORTUNITÉ** 🚀\n\n";
+        $intro  .= "Nous recrutons un(e) **{$title}**";
+
+        if ($location) {
+            $intro .= " pour notre bureau à **{$location}**";
+        }
+
+        $intro .= " !\n\n";
+
+        $body = "";
+        if ($type)     $body  .= "📌 **Type** : {$type}\n";
+        if ($duration) $body  .= "⏳ **Durée** : {$duration}\n";
+        if ($exp_yrs)  $body  .= "🎯 **Expérience** : {$exp_yrs} an(s)\n";
+
+        if ($location) $body .= "📍 **Lieu** : {$location}\n";
+
+        $body .= "\n";
+
+        if ($poste) {
+            $body .= "**📋 Le poste :**\n{$poste}\n\n";
+        }
+
+        if ($profil) {
+            $body .= "**👤 Profil recherché :**\n{$profil}\n\n";
+        }
+
+        if ($skills) {
+            $body .= "**🔧 Compétences :**\n{$skills}\n\n";
+        }
+
+        if ($details && strlen($body) < 600) {
+            $body .= "**📝 Description :**\n{$details}\n\n";
+        }
+
+        $cta      = "👉 **Postulez dès maintenant** : {$url}\n\n";
+        $cta     .= "💼 #HOMSYS #Recrutement #{$title} #Emploi #Maroc";
+
+        if ($type) $cta .= " #{$type}";
+        if ($location) $cta .= " #{$location}";
+
+        $postContent = $intro . $body . $cta;
+
+        if (strlen($postContent) > 3000) {
+            $postContent = mb_substr($postContent, 0, 2997) . '...';
+        }
+
+        $linkedinShareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' . urlencode($url);
+
+        return response()->json([
+            'post'     => $postContent,
+            'shareUrl' => $linkedinShareUrl,
+            'offerUrl' => $url,
+        ]);
+    }
+
 }

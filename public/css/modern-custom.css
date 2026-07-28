@@ -82,6 +82,13 @@
     margin: 10px 0 10px 0;
 }
 
+.homsys-contact-form textarea,
+.homsys-contact-form input[type=text],
+.homsys-contact-form input[type=email],
+.homsys-contact-form input[type=tel] {
+    color: #333 !important;
+}
+
 .homsys-modern-form .form-group {
     margin-bottom: 20px;
 }

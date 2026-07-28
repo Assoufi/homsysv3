@@ -236,6 +236,10 @@
             <i class="fa fa-eye"></i> Vue
         </button>
 
+        <button onclick="linkedinModal({{ $offre->id_offre }})" class="btn btn-sm btn-info">
+            <i class="fa fa-linkedin-square"></i> Publier sur LinkedIn
+        </button>
+
         {{-- Delete with confirmation --}}
         <button id="btn-delete-1" class="btn btn-sm btn-outline-danger" onclick="document.getElementById('btn-delete-1').style.display='none';document.getElementById('btn-delete-2').style.display='inline-block';">
             <i class="fa fa-trash-o"></i> Supprimer
@@ -412,6 +416,54 @@
                 </button>
             </div>
         </div>{{-- /view-panel --}}
+
+
+        {{-- ══════════════════════════════════════════
+             LINKEDIN MODAL
+        ══════════════════════════════════════════ --}}
+        <div class="modal fade" id="linkedinModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background:linear-gradient(135deg,#0077b5,#00a0dc);color:#fff;">
+                        <h5 class="modal-title">
+                            <i class="fa fa-linkedin-square"></i> Aperçu du post LinkedIn
+                        </h5>
+                        <button type="button" class="close text-white" onclick="closeLinkedinModal()" aria-label="Fermer">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="linkedin-loading" class="text-center py-4">
+                            <i class="fa fa-spinner fa-spin fa-2x"></i>
+                            <p class="mt-2">Génération du post...</p>
+                        </div>
+                        <div id="linkedin-content" style="display:none;">
+                            <div style="background:#f0f4f8;border:1px solid #d1d9e6;border-radius:8px;padding:1.25rem;margin-bottom:1rem;white-space:pre-wrap;font-family:sans-serif;font-size:.95rem;line-height:1.6;color:#1a3a5c;max-height:400px;overflow-y:auto;">
+                                <div id="linkedin-post-text"></div>
+                            </div>
+                            <div class="alert alert-info small">
+                                <i class="fa fa-info-circle"></i>
+                                Ce post a été généré automatiquement à partir des données de l'offre.
+                                Vous pouvez le modifier avant de le publier.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between flex-wrap gap-2">
+                        <button type="button" class="btn btn-outline-secondary" onclick="closeLinkedinModal()">
+                            <i class="fa fa-times"></i> Fermer
+                        </button>
+                        <div class="d-flex gap-2 flex-wrap">
+                            <button onclick="copyLinkedinPost()" class="btn btn-outline-primary">
+                                <i class="fa fa-clipboard"></i> Copier le texte
+                            </button>
+                            <a id="linkedin-share-btn" href="#" target="_blank" class="btn btn-primary" style="background:#0077b5;border-color:#0077b5;">
+                                <i class="fa fa-linkedin-square"></i> Publier sur LinkedIn
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 
         {{-- ══════════════════════════════════════════
@@ -594,5 +646,66 @@
     @if($errors->any())
         toggleMode('edit');
     @endif
+
+    /* ══════════════════════════════════════════
+       LINKEDIN POST — vanilla JS
+    ══════════════════════════════════════════ */
+    function linkedinModal(id) {
+        var modal = document.getElementById('linkedinModal');
+        if (!modal) return;
+
+        modal.style.display = 'block';
+        modal.classList.add('show');
+        document.body.classList.add('modal-open');
+
+        var backdrop = document.createElement('div');
+        backdrop.className = 'modal-backdrop fade show';
+        document.body.appendChild(backdrop);
+
+        document.getElementById('linkedin-loading').style.display = 'block';
+        document.getElementById('linkedin-content').style.display = 'none';
+
+        fetch('{{ url("offres/linkedin-post") }}/' + id)
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                document.getElementById('linkedin-loading').style.display = 'none';
+                document.getElementById('linkedin-content').style.display = 'block';
+                document.getElementById('linkedin-post-text').textContent = data.post;
+                document.getElementById('linkedin-share-btn').href = data.shareUrl;
+            })
+            .catch(function() {
+                document.getElementById('linkedin-loading').innerHTML =
+                    '<i class="fa fa-exclamation-triangle text-danger fa-2x"></i>' +
+                    '<p class="mt-2 text-danger">Erreur lors de la g\u00e9n\u00e9ration du post.</p>';
+            });
+    }
+
+    function closeLinkedinModal() {
+        var modal = document.getElementById('linkedinModal');
+        if (!modal) return;
+        modal.style.display = 'none';
+        modal.classList.remove('show');
+        document.body.classList.remove('modal-open');
+        document.querySelectorAll('.modal-backdrop').forEach(function(b) { b.remove(); });
+    }
+
+    function copyLinkedinPost() {
+        var text = document.getElementById('linkedin-post-text').textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Post copié dans le presse-papiers !');
+            });
+        } else {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            alert('Post copié dans le presse-papiers !');
+        }
+    }
 </script>
 @stop

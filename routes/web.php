@@ -42,6 +42,7 @@ Route::group(['prefix' => 'offres'], function () {
         Route::delete('/{id}', [OffresController::class, 'delete']);
         Route::post('/update/{id}', [OffresController::class, 'update']);
         Route::post('/', [OffresController::class, 'store'])->name('offres.store');
+        Route::get('/linkedin-post/{id}', [OffresController::class, 'linkedinPost']);
     });
 
     Route::get('/{id}', [OffresController::class, 'show'])->name('offre');
