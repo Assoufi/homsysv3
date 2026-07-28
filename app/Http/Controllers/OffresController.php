@@ -225,7 +225,7 @@ class OffresController extends Controller
         $intro  .= "Nous recrutons un(e) **{$title}**";
 
         if ($location) {
-            $intro .= " pour notre bureau à **{$location}**";
+            $intro .= " pour notre client à **{$location}**";
         }
 
         $intro .= " !\n\n";
