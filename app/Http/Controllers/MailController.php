@@ -134,20 +134,18 @@ class MailController extends Controller
         /*foreach (Request::all() as $key => $value) { 
         \Log::info($key . ' =>' . $value);
         }*/
-        if (empty(Request::get('g-recaptcha-response'))) {
-            Request::session()->flash('captcha', 'Il faut valider l\'envoi par le captcha');
-            return redirect('/#contact');
-        } else {
-            $date  = date('Y-m-d H:i:s');
-            $text  = Request::get('message');
-            $email = Request::get('email');
-            $name  = Request::get('name');
-            Mail::send('email.contact', compact('text', 'email', 'name', 'date'), function ($message) use ($email) {
-                $message->from($email)->to('contact@homsys.ma')->subject('Contact');
+        $date  = date('Y-m-d H:i:s');
+        $text  = Request::get('message');
+        $email = Request::get('email');
+        $name  = Request::get('name');
+        $sujet = Request::get('sujet');
+        $tel   = Request::get('tel');
 
-            });
-            return redirect()->back()->withSuccess(['Email envoyé. Nous vous contacterons dans les meilleurs délais, merci pour votre interêt']);
-        }
+        Mail::send('email.contact', compact('text', 'email', 'name', 'date', 'sujet', 'tel'), function ($message) use ($email, $sujet) {
+            $message->from($email)->to('contact@homsys.ma')->subject('Contact' . ($sujet ? ' - ' . $sujet : ''));
+        });
+
+        return redirect()->back()->withSuccess(['Email envoyé. Nous vous contacterons dans les meilleurs délais, merci pour votre interêt']);
     }
 
     

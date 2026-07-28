@@ -4,9 +4,15 @@
 	    <meta http-equiv="Content-Type" content="text/html"  charset="UTF-8"/>
 	</head>
 	<body>
-	    <div >
+	    <div>
 	    	<h3>Envoyée par : {{ $name }}</h3>
+	    	@if(!empty($sujet))
+	    	<p><strong>Sujet :</strong> {{ $sujet }}</p>
+	    	@endif
 	        <p>Email : {{ $email }}</p>
+	        @if(!empty($tel))
+	        <p>Téléphone : {{ $tel }}</p>
+	        @endif
 	        <p>à la date du : {{ $date }}</p>
 	    	<p>{!! nl2br(e($text)) !!}</p>
 	    </div>

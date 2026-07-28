@@ -31,24 +31,20 @@
                 @csrf
                 <ul>
                   <li>
-                    <input name="name" value="Votre Nom" onBlur="if(this.value == '') { this.value ='Votre Nom'; }" onFocus="if(this.value =='Votre Nom') { this.value = ''; }" type="text">
+                    <input name="name" type="text" required placeholder="Votre Nom">
                     <i class="homsys-icon homsys-user"></i></li>
                   <li>
-                    <input name="email" value="Votre Email" onBlur="if(this.value == '') { this.value ='Votre Email'; }" onFocus="if(this.value =='Votre Email') { this.value = ''; }" type="text">
+                    <input name="email" type="email" required placeholder="Votre Email">
                     <i class="homsys-icon homsys-mail"></i></li>
                   <li>
-                    <input name="sujet" value="Sujet" onBlur="if(this.value == '') { this.value ='Sujet'; }" onFocus="if(this.value =='Sujet') { this.value = ''; }" type="text">
+                    <input name="sujet" type="text" required placeholder="Sujet">
                     <i class="homsys-icon homsys-user"></i></li>
                   <li>
-                    <input name="tel" value="Votre numéro de téléphone" onBlur="if(this.value == '') { this.value ='Votre numéro de téléphone'; }" onFocus="if(this.value =='Votre numéro de téléphone') { this.value = ''; }" type="text">
+                    <input name="tel" type="tel" placeholder="Votre numéro de téléphone">
                     <i class="homsys-icon homsys-technology"></i></li>
                   <li class="homsys-contact-form-full">
-                    <textarea id="texto" name="message" placeholder="Votre message..."></textarea>
+                    <textarea id="texto" name="message" required placeholder="Votre message..."></textarea>
                   </li>
-                  <!--<li>
-                    <div class="g-recaptcha" data-sitekey="{!! env('NOCAPTCHA_SITEKEY') !!}"></div>
-                  </li>
-                -->
                   <li>
                     <input type="submit" value="Envoyer">
                   </li>

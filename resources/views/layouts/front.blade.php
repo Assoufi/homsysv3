@@ -40,13 +40,10 @@
                     <form method="POST" action="{{ url('mails/contact') }}">
                     <div class="form">
                         @csrf
-                        <p style="color:red;"> {{Session::get('captcha')}}</p>
                         <input class="input-text animated wow flipInY delay-02s" type="text" name="name" placeholder="Nom *" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;" required>
                         <input class="input-text animated wow flipInY delay-04s" type="text" name="email" placeholder="Email *" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;" required>
                         <p style="color:white;"> Votre Message *</p>
                         <textarea class="input-text text-area animated wow flipInY delay-06s" name="message" cols="0" rows="0" onFocus="if(this.value==this.defaultValue)this.value='';" onBlur="if(this.value=='')this.value=this.defaultValue;"></textarea>
-                        <div class="
-                        g-recaptcha" data-sitekey="{{ env('NOCAPTCHA_SITEKEY') }}"></div>
                         <input class="input-btn animated wow flipInY delay-04s" type="submit" value="ENVOYER">
                     </form>
                     </div>
