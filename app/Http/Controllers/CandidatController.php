@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use Auth;
 use Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
@@ -131,6 +132,38 @@ class CandidatController extends Controller
         }
 
         Candidat::create(array_merge(Request::except('id_candidat'), $fields));
+
+        // Send email notification to jobs@homsys.ma
+        $email        = Request::get('email', !empty($user) ? $user->email : '');
+        $nom          = Request::get('nom_condidat');
+        $prenom       = Request::get('prenom_condidat');
+        $telephone    = Request::get('telephone');
+        $texto        = Request::get('commentaire');
+        $niveau       = Request::get('niveau');
+        $experience   = Request::get('experience');
+        $fonction     = Request::get('fonction_candidat');
+        $entreprise   = Request::get('entreprise_candidat');
+        $titre        = 'Candidature Spontanée - ' . $nom . ' ' . $prenom;
+
+        try {
+            Mail::send('email.candidature', [
+                'nom'           => $nom . ' ' . $prenom,
+                'email'         => $email,
+                'telephone'     => $telephone,
+                'texto'         => "Fonction: {$fonction} | Entreprise: {$entreprise} | Niveau: {$niveau} | Exp: {$experience}\n\nCommentaire:\n{$texto}",
+                'disponibilite' => 'Spontanée',
+                'tjm'           => 'N/A',
+                'titre'         => $titre,
+            ], function ($message) use ($email, $storedPath, $titre) {
+                $message->from($email ? $email : 'noreply@homsys.ma')
+                        ->to('jobs@homsys.ma')
+                        ->subject($titre)
+                        ->attach(Storage::disk('local')->path($storedPath));
+            });
+        } catch (\Exception $e) {
+            \Log::error('Error sending spontaneous candidature email: ' . $e->getMessage());
+        }
+
         return redirect('/offres')->withSuccess(['Candidature enregistrée, Merci pour votre interêt']);
     }
 

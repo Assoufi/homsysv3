@@ -49,6 +49,11 @@ class HomeController extends Controller
         return view('about', compact('nb_offres', 'nb_cv', 'nb_clients', 'meta'));
     }
 
+    public function contact()
+    {
+        return (new MailController())->contactus();
+    }
+
     public function sitemap()
     {
         $offres = Offre::select(["id_offre", "updated_at"])
