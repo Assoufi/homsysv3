@@ -17,7 +17,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/portage', [CandidatController::class, 'portage']);
 Route::get('/about', [HomeController::class, 'about']);
-Route::get('/contact', [HomeController::class, 'contact']);
+Route::get('/contact', [MailController::class, 'contactus']);
 Route::get('/portage', [CandidatController::class, 'portage']);
 Route::post('/logout', function () {
     Auth::logout();
