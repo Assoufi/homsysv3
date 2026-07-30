@@ -95,6 +95,14 @@
                 </div>
 
                 <div class="col-md-6 style="margin-bottom: 20px; margin-top: 20px;">
+                    <a href="{{ url('password/change') }}" class="homsys-dashboard-card" style="background: linear-gradient(135deg, #ffc107, #e0a800);">
+                        <i class="fa fa-key fa-2x mb-2" style="margin-bottom: 10px;"></i>
+                        <h5>Mot de passe</h5>
+                        <p>Modifier votre mot de passe</p>
+                    </a>
+                </div>
+
+                <div class="col-md-6 style="margin-bottom: 20px; margin-top: 20px;">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                        class="homsys-dashboard-card" style="background: linear-gradient(135deg, #dc3545, #bd2130);">
                         <i class="fa fa-sign-out fa-2x mb-2" style="margin-bottom: 10px;"></i>

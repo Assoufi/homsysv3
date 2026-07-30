@@ -52,7 +52,7 @@
             <li class="homsys-banner-submit">
 
               <button type="submit" class="homsys-banner-search-btn">
-                <i class="fa fa-search"></i> Rechercher
+                <i class="fa fa-search"></i> 
               </button>
 
             </li>

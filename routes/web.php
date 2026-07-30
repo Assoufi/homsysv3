@@ -105,6 +105,17 @@ Route::group(['prefix' => 'mails'], function () {
     Route::post('/postuler', [MailController::class, 'postuler']);
 });
 
+Route::group(['prefix' => 'password'], function () {
+    Route::get('/forgot', [App\Http\Controllers\Auth\PasswordController::class, 'showForgotForm']);
+    Route::post('/email', [App\Http\Controllers\Auth\PasswordController::class, 'sendResetLink']);
+    Route::get('/reset/{token}', [App\Http\Controllers\Auth\PasswordController::class, 'showResetForm']);
+    Route::post('/reset', [App\Http\Controllers\Auth\PasswordController::class, 'reset']);
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/change', [App\Http\Controllers\Auth\PasswordController::class, 'showChangeForm']);
+        Route::post('/change', [App\Http\Controllers\Auth\PasswordController::class, 'change']);
+    });
+});
+
 Route::get('/logins', function () {
     $user = Auth::user();
     if ($user != null) {

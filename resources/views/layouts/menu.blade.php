@@ -96,6 +96,11 @@
                                 </a>
                                 <ul class="sub-menu" role="menu" aria-label="Menu utilisateur">
                                     <li role="none">
+                                        <a href="{{ url('password/change') }}" role="menuitem">
+                                            <i class="fa fa-key"></i> Modifier le mot de passe
+                                        </a>
+                                    </li>
+                                    <li role="none">
                                         <a href="{{ route('logout') }}" role="menuitem" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <i class="fa fa-btn fa-sign-out"></i> Déconnexion
                                         </a>

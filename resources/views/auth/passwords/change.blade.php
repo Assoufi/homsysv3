@@ -89,8 +89,8 @@
 
 <div class="auth-page">
     <div class="spontane-header">
-        <h3><i class="fa fa-lock"></i> Mot de passe oublié</h3>
-        <p>Entrez votre adresse email pour recevoir un lien de réinitialisation</p>
+        <h3><i class="fa fa-key"></i> Modifier mon mot de passe</h3>
+        <p>Choisissez un nouveau mot de passe sécurisé</p>
     </div>
 
     @if (session('success'))
@@ -101,29 +101,48 @@
     @endif
 
     <div class="panel panel-custom">
-        <div class="panel-heading"><i class="fa fa-envelope"></i> Réinitialisation</div>
+        <div class="panel-heading"><i class="fa fa-lock"></i> Changement de mot de passe</div>
         <div class="panel-body">
-            <form action="{{ url('password/email') }}" method="POST">
+            <form action="{{ url('password/change') }}" method="POST">
                 @csrf
 
                 <div class="form-group">
-                    <label for="email">Adresse email</label>
-                    <input type="email" name="email" id="email"
-                           class="form-control @error('email') is-invalid @enderror"
-                           value="{{ old('email') }}" placeholder="votre@email.com" required autofocus>
-                    @error('email')
+                    <label for="current_password">Mot de passe actuel</label>
+                    <input type="password" name="current_password" id="current_password"
+                           class="form-control @error('current_password') is-invalid @enderror"
+                           placeholder="Votre mot de passe actuel" required>
+                    @error('current_password')
                         <span class="invalid-feedback d-block small">{{ $message }}</span>
                     @enderror
                 </div>
 
+                <hr>
+
+                <div class="form-group">
+                    <label for="password">Nouveau mot de passe</label>
+                    <input type="password" name="password" id="password"
+                           class="form-control @error('password') is-invalid @enderror"
+                           placeholder="Minimum 6 caractères" required minlength="6">
+                    @error('password')
+                        <span class="invalid-feedback d-block small">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="password_confirmation">Confirmer le nouveau mot de passe</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation"
+                           class="form-control"
+                           placeholder="Retapez le nouveau mot de passe" required minlength="6">
+                </div>
+
                 <button type="submit" class="btn btn-submit-blue">
-                    <i class="fa fa-paper-plane"></i> Envoyer le lien
+                    <i class="fa fa-floppy-o"></i> Enregistrer
                 </button>
             </form>
 
             <div class="text-center mt-3">
-                <a href="{{ url('logins') }}" class="text-muted small">
-                    <i class="fa fa-arrow-left"></i> Retour à la connexion
+                <a href="{{ url()->previous() }}" class="text-muted small">
+                    <i class="fa fa-arrow-left"></i> Retour
                 </a>
             </div>
         </div>
