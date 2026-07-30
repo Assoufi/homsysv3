@@ -20,8 +20,18 @@
                 <nav class="homsys-nav" id="main-nav" role="navigation" aria-label="Menu principal">
                     <ul class="main-menu" role="menubar">
                         <!-- Accueil -->
-                        <li class="menu-item {{ Request::is('/') ? 'active' : '' }}" role="none">
-                            <a href="{{ url('/') }}" role="menuitem">Accueil</a>
+                        <li class="menu-item menu-item-has-children" role="none">
+                            <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                                Accueil <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+                            </a>
+                            <ul class="sub-menu" role="menu" aria-label="Sous-menu Accueil">
+                                <li role="none"><a href="{{ url('/') }}" role="menuitem">Entreprise</a></li>
+                                <li role="none"><a href="{{ url('/about') }}" role="menuitem">Qui-sommes-nous</a></li>
+                                <li role="none"><a href="{{ url('/about') }}#service" role="menuitem">Nos Services</a></li>
+                                <li role="none"><a href="{{ url('/about') }}#valeurs" role="menuitem">Nos valeurs</a></li>
+                                <li role="none"><a href="{{ url('/about') }}#methodologie" role="menuitem">Notre Méthodologie</a></li>
+                                <li role="none"><a href="{{ url('mails/contactus') }}" role="menuitem">Contact</a></li>
+                            </ul>
                         </li>
 
                         <!-- Candidats (avec sous-menu) -->
@@ -37,41 +47,45 @@
                             </ul>
                         </li>
 
-                        <!-- A propos (avec sous-menu) -->
-                        <li class="menu-item menu-item-has-children" role="none">
-                            <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">
-                                A propos <i class="fa fa-angle-double-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="sub-menu" role="menu" aria-label="Sous-menu A propos">
-                                <li role="none"><a href="{{ url('/about') }}" role="menuitem">Qui-sommes-nous</a></li>
-                                <li role="none"><a href="{{ url('/about') }}#service" role="menuitem">Nos Services</a></li>
-                                <li role="none"><a href="{{ url('/about') }}#valeurs" role="menuitem">Nos valeurs</a></li>
-                                <li role="none"><a href="{{ url('/about') }}#methodologie" role="menuitem">Notre Méthodologie</a></li>
-                                <li role="none"><a href="{{ url('mails/contactus') }}" role="menuitem">Contact</a></li>
-                            </ul>
-                        </li>
-
                         <!-- Offres -->
                         <li class="menu-item {{ Request::is('offres') ? 'active' : '' }}" role="none">
                             <a href="{{ url('offres') }}" role="menuitem">Offres</a>
                         </li>
 
+                        <!-- Export de service -->
+                        <li class="menu-item {{ Request::is('export-service') ? 'active' : '' }}" role="none">
+                            <a href="{{ url('export-service') }}" role="menuitem">Export de service</a>
+                        </li>
+
+                        <!-- Outsourcing -->
+                        <li class="menu-item {{ Request::is('outsourcing') ? 'active' : '' }}" role="none">
+                            <a href="{{ url('outsourcing') }}" role="menuitem">Outsourcing</a>
+                        </li>
+
+                        @if (Auth::guest())
                         <!-- Contact -->
                         <li class="menu-item {{ Request::is('mails/contactus') ? 'active' : '' }}" role="none">
                             <a href="{{ url('mails/contactus') }}" role="menuitem">Contact</a>
                         </li>
+                        @endif
+
+                       <!-- Authentication Links -->
+                        
 
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li class="menu-item" role="none">
-                                <a href="{{ url('logins') }}" role="menuitem">
-                                    <i class="fa fa-btn fa-sign-in"></i> Connexion
+                            <li class="menu-item menu-item-has-children" role="none">
+                                <a href="#" role="menuitem" aria-haspopup="true" aria-expanded="false">
+                                    Connexion <i class="fa fa-angle-double-down" aria-hidden="true"></i>
                                 </a>
-                            </li>
-                            <li class="menu-item" role="none">
-                                <a href="{{ url('candidats/create') }}" role="menuitem">
-                                    <i class="fa fa-user-plus" aria-hidden="true"></i> S'inscrire
-                                </a>
+                                <ul class="sub-menu" role="menu" aria-label="Sous-menu Connexion">
+                                    <li class="menu-item" role="none">
+                                        <a href="{{ url('logins') }}" role="menuitem"><i class="fa fa-btn fa-sign-in"></i> Connexion</a>
+                                    </li>
+                                    <li class="menu-item" role="none">
+                                        <a href="{{ url('candidats/create') }}" role="menuitem"><i class="fa fa-user-plus" aria-hidden="true"></i> S'inscrire</a>
+                                    </li>
+                                </ul>
                             </li>
                         @else
                             @if (Auth::user()->hasRole('admin'))

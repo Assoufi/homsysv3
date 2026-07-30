@@ -40,6 +40,32 @@ class HomeController extends Controller
         return view('index', compact('lastest_offres', 'nb_offres', 'nb_cv', 'nb_clients', 'meta'));
     }
 
+    public function exportService()
+    {
+        $nb_offres  = Offre::count() + 1000;
+        $nb_cv      = Candidature::count() + 10000;
+        $nb_clients = 163;
+        $meta = [
+            'title'       => 'Export de service IT | HOMSYS à l\'international',
+            'description' => 'HOMSYS exporte son expertise IT depuis le Maroc : détachement, offshore régie, remote. Experts IT marocains en Europe, Amérique du Nord et Afrique.',
+            'created_at'  => Carbon::now(),
+        ];
+        return view('export_service', compact('nb_offres', 'nb_cv', 'nb_clients', 'meta'));
+    }
+
+    public function outsourcing()
+    {
+        $nb_offres  = Offre::count() + 1000;
+        $nb_cv      = Candidature::count() + 10000;
+        $nb_clients = 163;
+        $meta = [
+            'title'       => 'Outsourcing de Freelances IT | HOMSYS Maroc',
+            'description' => 'HOMSYS, fournisseur de référence de talents IT indépendants au Maroc. Recrutez des consultants IT qualifiés en freelance, CDI ou CDD.',
+            'created_at'  => Carbon::now(),
+        ];
+        return view('outsourcing', compact('nb_offres', 'nb_cv', 'nb_clients', 'meta'));
+    }
+
     public function about()
     {
          $nb_offres         = Offre::count() + 1000;
