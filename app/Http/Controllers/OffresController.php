@@ -44,7 +44,7 @@ class OffresController extends Controller
     }
 
 
-        public function show($id)
+    public function show($id)
     {
         $id    = head(explode('-', $id));
         $offre = Offre::where('id_offre', $id)->first();

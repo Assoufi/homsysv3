@@ -6,180 +6,194 @@
 
 @push('styles')
 <style>
-    /* ── Page wrapper ───────────────────────────────────────── */
-    .sa-page { padding: 2rem 0 4rem; }
-
-    /* ── Sticky top action bar ──────────────────────────────── */
-    .sa-topbar {
-        position: sticky;
-        top: 0;
-        z-index: 999;
-        background: #fff;
-        border-bottom: 2px solid #e9ecef;
-        padding: .75rem 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: .6rem;
-        flex-wrap: wrap;
-        box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    .sa-page {
+        width: 100%;
+        max-width: 1100px;
+        margin: 0 auto 50px;
+        padding: 0 15px;
     }
-    .sa-topbar .sa-title {
+    .spontane-header {
+        margin-bottom: 25px;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+    }
+    .spontane-header h3 {
+        font-weight: 700;
+        color: #2c3e50;
+        margin: 0;
+    }
+    .spontane-header p {
+        color: #64748b;
+        margin: 8px 0 0;
+        font-size: 0.95rem;
+    }
+    .panel-custom {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        margin-bottom: 25px;
+        background: #ffffff;
+        overflow: hidden;
+    }
+    .panel-custom .panel-heading {
         font-weight: 700;
         font-size: 1.1rem;
-        color: #1a3a5c;
-        flex: 1;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        color: #007bff;
+        background: #f8fafc;
+        border-bottom: 1px solid #e2e8f0;
+        border-left: 5px solid #007bff;
+        padding: 12px 18px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
     }
-
-    /* ── Hero card ──────────────────────────────────────────── */
-    .sa-hero {
-        background: linear-gradient(135deg, #1a3a5c 0%, #2563a8 100%);
-        color: #fff;
-        border-radius: 12px;
-        padding: 2rem 2rem 1.5rem;
-        margin-bottom: 1.5rem;
-        position: relative;
-        overflow: hidden;
-    }
-    .sa-hero::after {
-        content: '';
-        position: absolute;
-        right: -60px; top: -60px;
-        width: 220px; height: 220px;
-        border-radius: 50%;
-        background: rgba(255,255,255,.06);
-    }
-    .sa-hero h1 {
-        font-size: 1.6rem;
-        font-weight: 700;
-        margin-bottom: .5rem;
-    }
-    .sa-hero .badge-type {
+    .panel-custom .panel-heading .badge-type {
         display: inline-block;
-        background: rgba(255,255,255,.2);
-        border: 1px solid rgba(255,255,255,.3);
-        color: #fff;
+        background: #e8f1ff;
+        border: 1px solid #bfd8ff;
+        color: #007bff;
         border-radius: 50px;
-        padding: .3rem .9rem;
-        font-size: .8rem;
+        padding: .2rem .7rem;
+        font-size: .78rem;
         font-weight: 600;
         letter-spacing: .04em;
+        margin-left: 8px;
     }
-    .sa-hero .badge-status-active {
-        background: #28a745; color: #fff;
-        border-radius: 50px; padding: .3rem .9rem;
-        font-size: .8rem; font-weight: 600;
+    .panel-custom .panel-heading .badge-status-active {
+        background: #d4edda;
+        color: #155724;
+        border-radius: 50px;
+        padding: .2rem .7rem;
+        font-size: .78rem;
+        font-weight: 600;
+        margin-left: 4px;
     }
-    .sa-hero .badge-status-expired {
-        background: #dc3545; color: #fff;
-        border-radius: 50px; padding: .3rem .9rem;
-        font-size: .8rem; font-weight: 600;
+    .panel-custom .panel-heading .badge-status-expired {
+        background: #f8d7da;
+        color: #721c24;
+        border-radius: 50px;
+        padding: .2rem .7rem;
+        font-size: .78rem;
+        font-weight: 600;
+        margin-left: 4px;
     }
-
-    /* ── Stat chips ─────────────────────────────────────────── */
-    .sa-stats { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem; }
-    .sa-stat-chip {
-        background: rgba(255,255,255,.15);
-        border: 1px solid rgba(255,255,255,.25);
+    .panel-custom .panel-body {
+        padding: 20px;
+    }
+    .about-stats {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+    }
+    .about-stat {
+        flex: 1 1 180px;
+        margin: 10px;
+        text-align: center;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
         border-radius: 8px;
-        padding: .5rem 1.1rem;
-        display: flex; align-items: center; gap: .5rem;
-        font-size: .9rem;
+        padding: 22px 16px;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+        color: #2c3e50;
     }
-    .sa-stat-chip i { font-size: 1rem; opacity: .85; }
-    .sa-stat-chip strong { font-size: 1.2rem; font-weight: 700; }
-
-    /* ── Meta info grid ─────────────────────────────────────── */
-    .sa-meta-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: .75rem;
-        margin-bottom: 1.5rem;
+    .about-stat:hover {
+        box-shadow: 0 6px 16px rgba(0,123,255,0.12);
+        transform: translateY(-2px);
     }
-    .sa-meta-item {
-        background: #f8f9fa;
-        border: 1px solid #e9ecef;
-        border-radius: 8px;
-        padding: .75rem 1rem;
-        display: flex; align-items: flex-start; gap: .6rem;
+    .about-stat .stat-icon {
+        width: 48px;
+        height: 48px;
+        line-height: 48px;
+        margin: 0 auto 12px;
+        border-radius: 50%;
+        background: #e8f1ff;
+        color: #007bff;
+        font-size: 1.25rem;
     }
-    .sa-meta-item i {
-        color: #2563a8;
-        font-size: 1rem;
-        margin-top: 2px;
-        flex-shrink: 0;
+    .about-stat .stat-number {
+        display: block;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #2c3e50;
+        line-height: 1.2;
     }
-    .sa-meta-item .sa-meta-label {
-        font-size: .72rem;
+    .about-stat .stat-label {
+        display: block;
+        margin-top: 4px;
+        color: #64748b;
+        font-weight: 600;
+        font-size: 0.9rem;
         text-transform: uppercase;
-        letter-spacing: .06em;
-        color: #6c757d;
-        font-weight: 600;
-        margin-bottom: 2px;
+        letter-spacing: 0.04em;
     }
-    .sa-meta-item .sa-meta-value {
-        font-size: .92rem;
-        color: #1a3a5c;
-        font-weight: 500;
+    .about-card-grid {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
     }
-
-    /* ── Section cards ──────────────────────────────────────── */
-    .sa-section {
-        background: #fff;
-        border: 1px solid #e9ecef;
-        border-radius: 10px;
-        margin-bottom: 1.25rem;
-        overflow: hidden;
+    .about-card {
+        flex: 1 1 280px;
+        margin: 10px;
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        padding: 22px 20px;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease;
     }
-    .sa-section-header {
-        background: linear-gradient(90deg, #1a3a5c, #2563a8);
-        color: #fff;
-        padding: .65rem 1.1rem;
-        display: flex; align-items: center; gap: .5rem;
-        font-weight: 600;
-        font-size: .92rem;
-        letter-spacing: .03em;
+    .about-card:hover {
+        border-color: #bfd8ff;
+        box-shadow: 0 6px 16px rgba(0,123,255,0.1);
     }
-    .sa-section-header i { font-size: 1rem; opacity: .9; }
-    .sa-section-body {
-        padding: 1.1rem 1.25rem;
-        color: #2d3748;
-        line-height: 1.75;
-        font-size: .95rem;
+    .about-card .card-icon {
+        width: 44px;
+        height: 44px;
+        line-height: 44px;
+        text-align: center;
+        border-radius: 8px;
+        background: #e8f1ff;
+        color: #007bff;
+        font-size: 1.15rem;
+        margin-bottom: 14px;
     }
-
-    /* ── Chart collapse ─────────────────────────────────────── */
+    .about-card h4 {
+        font-weight: 700;
+        color: #2c3e50;
+        font-size: 1.05rem;
+        margin: 0 0 10px;
+    }
+    .about-card p {
+        color: #475569;
+        line-height: 1.65;
+        margin: 0;
+        font-size: 0.95rem;
+    }
     .sa-chart-toggle {
-        background: none; border: none; padding: 0;
-        color: rgba(255,255,255,.8);
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 5px;
+        padding: 8px 14px;
+        color: #007bff;
         font-size: .85rem;
+        font-weight: 600;
         cursor: pointer;
-        display: flex; align-items: center; gap: .3rem;
-        transition: color .2s;
+        display: inline-flex;
+        align-items: center;
+        gap: .3rem;
+        transition: all .2s;
     }
-    .sa-chart-toggle:hover { color: #fff; }
-
-    /* ── Edit / View toggle button ──────────────────────────── */
-    #btn-edit-mode  { transition: all .2s; }
-    #btn-view-mode  { transition: all .2s; }
-
-    /* ── Edit form card ─────────────────────────────────────── */
+    .sa-chart-toggle:hover {
+        background: #e8f1ff;
+        border-color: #007bff;
+        color: #0056b3;
+    }
+    #btn-edit-mode { transition: all .2s; }
+    #btn-view-mode { transition: all .2s; }
     .sa-edit-card {
         background: #fff;
         border: 1px solid #dee2e6;
-        border-radius: 12px;
+        border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 4px 24px rgba(0,0,0,.07);
-    }
-    .sa-edit-header {
-        background: linear-gradient(135deg, #1a3a5c, #2563a8);
-        color: #fff;
-        padding: 1rem 1.5rem;
-        font-size: 1.05rem;
-        font-weight: 700;
-        display: flex; align-items: center; gap: .5rem;
     }
     .sa-edit-body { padding: 1.5rem; }
     .sa-edit-body .form-group label {
@@ -187,28 +201,40 @@
         font-size: .82rem;
         text-transform: uppercase;
         letter-spacing: .06em;
-        color: #4a5568;
+        color: #475569;
         margin-bottom: .35rem;
     }
     .sa-edit-body .form-control {
-        border-radius: 6px;
-        border-color: #ced4da;
+        border-radius: 5px;
+        border: 1px solid #e2e8f0;
         font-size: .93rem;
     }
     .sa-edit-body .form-control:focus {
-        border-color: #2563a8;
-        box-shadow: 0 0 0 3px rgba(37,99,168,.15);
+        border-color: #007bff;
+        box-shadow: 0 0 0 3px rgba(0,123,255,0.12);
     }
     .sa-edit-body textarea.form-control { resize: vertical; }
-
-    /* ── Delete confirm button ──────────────────────────────── */
     .btn-delete-confirm { display: none; }
     .btn-delete-confirm.visible { display: inline-block; }
-
-    /* ── Responsive tweaks ──────────────────────────────────── */
+    .btn-submit-blue {
+        background-color: #007bff !important;
+        border-color: #007bff !important;
+        color: #ffffff !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+        padding: 11px 28px !important;
+        border-radius: 5px !important;
+        transition: all 0.2s ease-in-out;
+        display: inline-block;
+        text-decoration: none !important;
+    }
+    .btn-submit-blue:hover {
+        background-color: #0056b3 !important;
+        border-color: #004085 !important;
+        color: #ffffff !important;
+    }
     @media (max-width: 576px) {
-        .sa-hero h1 { font-size: 1.2rem; }
-        .sa-topbar .sa-title { font-size: .95rem; }
+        .about-stat .stat-number { font-size: 1.3rem; }
     }
 </style>
 @endpush
@@ -217,40 +243,34 @@
 <div class="sa-page">
 
     {{-- ══════════════════════════════════════════
-         STICKY TOP ACTION BAR
+         SPONTANE HEADER (like about/contact)
     ══════════════════════════════════════════ --}}
-    <div class="sa-topbar">
-        <span class="sa-title">
-            <i class="fa fa-briefcase mr-1"></i> {{ $offre->titre_offre }}
-        </span>
-
-        <a href="{{ url('offres') }}" class="btn btn-sm btn-outline-secondary">
-            <i class="fa fa-arrow-left"></i> Retour
-        </a>
-
-        <button id="btn-edit-mode" onclick="toggleMode('edit')" class="btn btn-sm btn-warning">
-            <i class="fa fa-pencil-square-o"></i> Modifier
-        </button>
-
-        <button id="btn-view-mode" onclick="toggleMode('view')" class="btn btn-sm btn-secondary" style="display:none;">
-            <i class="fa fa-eye"></i> Vue
-        </button>
-
-        <button onclick="linkedinModal({{ $offre->id_offre }})" class="btn btn-sm btn-info">
-            <i class="fa fa-linkedin-square"></i> Publier sur LinkedIn
-        </button>
-
-        {{-- Delete with confirmation --}}
-        <button id="btn-delete-1" class="btn btn-sm btn-outline-danger" onclick="document.getElementById('btn-delete-1').style.display='none';document.getElementById('btn-delete-2').style.display='inline-block';">
-            <i class="fa fa-trash-o"></i> Supprimer
-        </button>
-        <a href="{{ url('offres/delete', ['id' => $offre->id_offre]) }}"
-           id="btn-delete-2"
-           class="btn btn-sm btn-danger"
-           style="display:none;"
-           onclick="return confirm('Supprimer définitivement cette offre ?')">
-            <i class="fa fa-exclamation-triangle"></i> Confirmer la suppression
-        </a>
+    <div class="spontane-header">
+        <h3><i class="fa fa-briefcase mr-1"></i> {{ $offre->titre_offre }}</h3>
+        <div class="d-flex gap-2 flex-wrap mt-2">
+            <a href="{{ url('offres') }}" class="btn btn-outline-secondary btn-sm">
+                <i class="fa fa-arrow-left"></i> Retour
+            </a>
+            <button id="btn-edit-mode" onclick="toggleMode('edit')" class="btn btn-warning btn-sm">
+                <i class="fa fa-pencil-square-o"></i> Modifier
+            </button>
+            <button id="btn-view-mode" onclick="toggleMode('view')" class="btn btn-secondary btn-sm" style="display:none;">
+                <i class="fa fa-eye"></i> Vue
+            </button>
+            <button onclick="linkedinModal({{ $offre->id_offre }})" class="btn btn-info btn-sm">
+                <i class="fa fa-linkedin-square"></i> Publier sur LinkedIn
+            </button>
+            <button id="btn-delete-1" class="btn btn-outline-danger btn-sm" onclick="document.getElementById('btn-delete-1').style.display='none';document.getElementById('btn-delete-2').style.display='inline-block';">
+                <i class="fa fa-trash-o"></i> Supprimer
+            </button>
+            <a href="{{ url('offres/delete', ['id' => $offre->id_offre]) }}"
+               id="btn-delete-2"
+               class="btn btn-danger btn-sm"
+               style="display:none;"
+               onclick="return confirm('Supprimer définitivement cette offre ?')">
+                <i class="fa fa-exclamation-triangle"></i> Confirmer
+            </a>
+        </div>
     </div>
 
     <div class="container sa-page">
@@ -260,150 +280,141 @@
         ══════════════════════════════════════════ --}}
         <div id="view-panel">
 
-            {{-- Hero --}}
-            <div class="sa-hero">
-                <div class="d-flex align-items-start justify-content-between flex-wrap gap-2">
-                    <div>
-                        <h1>{{ $offre->titre_offre }}</h1>
-                        <span class="badge-type">{{ $offre->type_offre }}</span>
-                        &nbsp;
-                        @if($offre->exp_offre == 1)
-                            <span class="badge-status-expired"><i class="fa fa-times-circle"></i> Clôturée</span>
-                        @else
-                            <span class="badge-status-active"><i class="fa fa-check-circle"></i> Active</span>
+            {{-- Hero / Info Panel --}}
+            <div class="panel panel-custom">
+                <div class="panel-heading">
+                    <i class="fa fa-briefcase"></i> {{ $offre->titre_offre }}
+                    <span class="badge-type">{{ $offre->type_offre }}</span>
+                    &nbsp;
+                    @if($offre->exp_offre == 1)
+                        <span class="badge-status-expired"><i class="fa fa-times-circle"></i> Cl&ocirc;tur&eacute;e</span>
+                    @else
+                        <span class="badge-status-active"><i class="fa fa-check-circle"></i> Active</span>
+                    @endif
+                </div>
+                <div class="panel-body">
+                    <div class="about-stats">
+                        <div class="about-stat">
+                            <div class="stat-icon"><i class="fa fa-eye"></i></div>
+                            <span class="stat-number">{{ $visite_offres_nb }}</span>
+                            <span class="stat-label">Vues</span>
+                        </div>
+                        <div class="about-stat">
+                            <div class="stat-icon"><i class="fa fa-users"></i></div>
+                            <span class="stat-number">{{ $candidatures }}</span>
+                            <span class="stat-label">Candidatures</span>
+                        </div>
+                        @if(!empty($offre->ville_offre))
+                        <div class="about-stat">
+                            <div class="stat-icon"><i class="fa fa-map-marker"></i></div>
+                            <span class="stat-number">{{ $offre->ville_offre }}</span>
+                            <span class="stat-label">Ville</span>
+                        </div>
+                        @endif
+                        @if(!empty($offre->date_demarrage))
+                        <div class="about-stat">
+                            <div class="stat-icon"><i class="fa fa-calendar"></i></div>
+                            <span class="stat-number">{{ $offre->date_demarrage }}</span>
+                            <span class="stat-label">D&eacute;marrage</span>
+                        </div>
                         @endif
                     </div>
-                    <div>
+
+                    <div class="about-refs mt-3">
                         <button class="sa-chart-toggle" data-toggle="collapse" data-target="#chartCollapse" aria-expanded="false">
                             <i class="fa fa-bar-chart"></i> Statistiques visites
                         </button>
                     </div>
                 </div>
-
-                {{-- Stats --}}
-                <div class="sa-stats">
-                    <div class="sa-stat-chip">
-                        <i class="fa fa-eye"></i>
-                        <div><div style="font-size:.72rem;opacity:.8;">Vues</div><strong>{{ $visite_offres_nb }}</strong></div>
-                    </div>
-                    <div class="sa-stat-chip">
-                        <i class="fa fa-users"></i>
-                        <div><div style="font-size:.72rem;opacity:.8;">Candidatures</div><strong>{{ $candidatures }}</strong></div>
-                    </div>
-                    @if(!empty($offre->ville_offre))
-                    <div class="sa-stat-chip">
-                        <i class="fa fa-map-marker"></i>
-                        <div><div style="font-size:.72rem;opacity:.8;">Ville</div><strong>{{ $offre->ville_offre }}</strong></div>
-                    </div>
-                    @endif
-                    @if(!empty($offre->date_demarrage))
-                    <div class="sa-stat-chip">
-                        <i class="fa fa-calendar"></i>
-                        <div><div style="font-size:.72rem;opacity:.8;">Démarrage</div><strong>{{ $offre->date_demarrage }}</strong></div>
-                    </div>
-                    @endif
-                </div>
             </div>
 
             {{-- Chart (collapsed by default) --}}
             <div class="collapse mb-3" id="chartCollapse">
-                <div class="sa-section">
-                    <div class="sa-section-header"><i class="fa fa-bar-chart"></i> Visites par jour</div>
-                    <div class="sa-section-body">
+                <div class="panel panel-custom">
+                    <div class="panel-heading"><i class="fa fa-bar-chart"></i> Visites par jour</div>
+                    <div class="panel-body">
                         @include('graphs.visite_offre_jour')
                     </div>
                 </div>
             </div>
 
             {{-- Meta grid --}}
-            <div class="sa-meta-grid">
-                <div class="sa-meta-item">
-                    <i class="fa fa-calendar-o"></i>
-                    <div>
-                        <div class="sa-meta-label">Publié le</div>
-                        <div class="sa-meta-value">{{ $offre->updated_at?->format('d/m/Y') ?? 'N/A' }}</div>
-                    </div>
+            <div class="about-card-grid">
+                <div class="about-card">
+                    <div class="card-icon"><i class="fa fa-calendar-o"></i></div>
+                    <h4>Publi&eacute; le</h4>
+                    <p>{{ $offre->updated_at?->format('d/m/Y') ?? 'N/A' }}</p>
                 </div>
                 @if(!empty($offre->duree))
-                <div class="sa-meta-item">
-                    <i class="fa fa-clock-o"></i>
-                    <div>
-                        <div class="sa-meta-label">Durée</div>
-                        <div class="sa-meta-value">{{ $offre->duree }}</div>
-                    </div>
+                <div class="about-card">
+                    <div class="card-icon"><i class="fa fa-clock-o"></i></div>
+                    <h4>Dur&eacute;e</h4>
+                    <p>{{ $offre->duree }}</p>
                 </div>
                 @endif
                 @if(!empty($offre->experience))
-                <div class="sa-meta-item">
-                    <i class="fa fa-star-o"></i>
-                    <div>
-                        <div class="sa-meta-label">Expérience</div>
-                        <div class="sa-meta-value">{{ $offre->experience }} an(s)</div>
-                    </div>
+                <div class="about-card">
+                    <div class="card-icon"><i class="fa fa-star-o"></i></div>
+                    <h4>Exp&eacute;rience</h4>
+                    <p>{{ $offre->experience }} an(s)</p>
                 </div>
                 @endif
                 @if(!empty($offre->formation))
-                <div class="sa-meta-item">
-                    <i class="fa fa-graduation-cap"></i>
-                    <div>
-                        <div class="sa-meta-label">Formation</div>
-                        <div class="sa-meta-value">{{ $offre->formation }}</div>
-                    </div>
+                <div class="about-card">
+                    <div class="card-icon"><i class="fa fa-graduation-cap"></i></div>
+                    <h4>Formation</h4>
+                    <p>{{ $offre->formation }}</p>
                 </div>
                 @endif
                 @if(!empty($offre->client))
-                <div class="sa-meta-item">
-                    <i class="fa fa-university"></i>
-                    <div>
-                        <div class="sa-meta-label">Client</div>
-                        <div class="sa-meta-value">{{ $offre->client }}</div>
-                    </div>
+                <div class="about-card">
+                    <div class="card-icon"><i class="fa fa-university"></i></div>
+                    <h4>Client</h4>
+                    <p>{{ $offre->client }}</p>
                 </div>
                 @endif
                 @if(!empty($offre->contact))
-                <div class="sa-meta-item">
-                    <i class="fa fa-address-card-o"></i>
-                    <div>
-                        <div class="sa-meta-label">Contact</div>
-                        <div class="sa-meta-value">{{ $offre->contact }}</div>
-                    </div>
+                <div class="about-card">
+                    <div class="card-icon"><i class="fa fa-address-card-o"></i></div>
+                    <h4>Contact</h4>
+                    <p>{{ $offre->contact }}</p>
                 </div>
                 @endif
             </div>
 
             {{-- Content sections --}}
             @if(!empty($offre->poste))
-            <div class="sa-section">
-                <div class="sa-section-header"><i class="fa fa-briefcase"></i> Poste</div>
-                <div class="sa-section-body">{!! $offre->poste !!}</div>
+            <div class="panel panel-custom">
+                <div class="panel-heading"><i class="fa fa-briefcase"></i> Poste</div>
+                <div class="panel-body">{!! $offre->poste !!}</div>
             </div>
             @endif
 
             @if(!empty($offre->profil))
-            <div class="sa-section">
-                <div class="sa-section-header"><i class="fa fa-user-o"></i> Profil recherché</div>
-                <div class="sa-section-body">{!! $offre->profil !!}</div>
+            <div class="panel panel-custom">
+                <div class="panel-heading"><i class="fa fa-user-o"></i> Profil recherch&eacute;</div>
+                <div class="panel-body">{!! $offre->profil !!}</div>
             </div>
             @endif
 
             @if(!empty($offre->competences))
-            <div class="sa-section">
-                <div class="sa-section-header"><i class="fa fa-cogs"></i> Compétences demandées</div>
-                <div class="sa-section-body">{!! $offre->competences !!}</div>
+            <div class="panel panel-custom">
+                <div class="panel-heading"><i class="fa fa-cogs"></i> Comp&eacute;tences demand&eacute;es</div>
+                <div class="panel-body">{!! $offre->competences !!}</div>
             </div>
             @endif
 
             @if(!empty($offre->qualites))
-            <div class="sa-section">
-                <div class="sa-section-header"><i class="fa fa-heart-o"></i> Qualités personnelles</div>
-                <div class="sa-section-body">{!! $offre->qualites !!}</div>
+            <div class="panel panel-custom">
+                <div class="panel-heading"><i class="fa fa-heart-o"></i> Qualit&eacute;s personnelles</div>
+                <div class="panel-body">{!! $offre->qualites !!}</div>
             </div>
             @endif
 
             @if(!empty($offre->description_offre))
-            <div class="sa-section">
-                <div class="sa-section-header"><i class="fa fa-align-left"></i> Détails de l'offre</div>
-                <div class="sa-section-body">{!! $offre->description_offre !!}</div>
+            <div class="panel panel-custom">
+                <div class="panel-heading"><i class="fa fa-align-left"></i> D&eacute;tails de l&rsquo;offre</div>
+                <div class="panel-body">{!! $offre->description_offre !!}</div>
             </div>
             @endif
 
@@ -470,11 +481,9 @@
              EDIT MODE
         ══════════════════════════════════════════ --}}
         <div id="edit-panel" style="display:none;">
-            <div class="sa-edit-card">
-                <div class="sa-edit-header">
-                    <i class="fa fa-pencil-square-o"></i> Modification : {{ $offre->titre_offre }}
-                </div>
-                <div class="sa-edit-body">
+            <div class="panel panel-custom">
+                <div class="panel-heading"><i class="fa fa-pencil-square-o"></i> Modification : {{ $offre->titre_offre }}</div>
+                <div class="panel-body">
                     <form action="{{ url('offres/update/'.$offre->id_offre) }}" method="POST">
                         @csrf
 
@@ -510,7 +519,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="date_demarrage">Date Démarrage</label>
+                                    <label for="date_demarrage">Date D&eacute;marrage</label>
                                     <input type="text" id="date_demarrage" name="date_demarrage"
                                            value="{{ $offre->date_demarrage }}" class="form-control">
                                 </div>
@@ -520,14 +529,14 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="duree">Durée</label>
+                                    <label for="duree">Dur&eacute;e</label>
                                     <input type="text" id="duree" name="duree"
                                            value="{{ $offre->duree }}" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="experience">Expérience (ans)</label>
+                                    <label for="experience">Exp&eacute;rience (ans)</label>
                                     <input type="number" id="experience" name="experience"
                                            value="{{ $offre->experience }}" class="form-control">
                                 </div>
@@ -559,12 +568,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label>État de l'offre</label><br>
+                            <label>&Eacute;tat de l&rsquo;offre</label><br>
                             <input name="exp_offre"
                                    data-onstyle="warning" data-offstyle="success"
                                    @if($offre->exp_offre == 1) checked @endif
                                    data-toggle="toggle" value="1"
-                                   data-on="Clôturée" data-off="Active"
+                                   data-on="Cl&ocirc;tur&eacute;e" data-off="Active"
                                    data-width="140"
                                    type="checkbox">
                         </div>
@@ -584,19 +593,19 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="competences">Compétences</label>
+                            <label for="competences">Comp&eacute;tences</label>
                             <textarea name="competences" id="competences" rows="10"
                                       class="form-control">{!! $offre->competences !!}</textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="qualites">Qualités</label>
+                            <label for="qualites">Qualit&eacute;s</label>
                             <textarea name="qualites" id="qualites" rows="10"
                                       class="form-control">{!! $offre->qualites !!}</textarea>
                         </div>
 
                         <div class="form-group">
-                            <label for="description_offre">Description / Détails</label>
+                            <label for="description_offre">Description / D&eacute;tails</label>
                             <textarea name="description_offre" id="description_offre" rows="10"
                                       class="form-control">{!! $offre->description_offre !!}</textarea>
                         </div>
@@ -605,7 +614,7 @@
                             <button type="button" onclick="toggleMode('view')" class="btn btn-outline-secondary">
                                 <i class="fa fa-times"></i> Annuler
                             </button>
-                            <button type="submit" class="btn btn-success btn-lg">
+                            <button type="submit" class="btn btn-submit-blue">
                                 <i class="fa fa-floppy-o"></i> Enregistrer les modifications
                             </button>
                         </div>
