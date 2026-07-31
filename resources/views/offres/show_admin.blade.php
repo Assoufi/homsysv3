@@ -4,7 +4,7 @@
     Offre : {{ $offre->titre_offre }}
 @stop
 
-@push('styles')
+@section('content')
 <style>
     .sa-page {
         width: 100%;
@@ -237,9 +237,7 @@
         .about-stat .stat-number { font-size: 1.3rem; }
     }
 </style>
-@endpush
 
-@section('content')
 <div class="sa-page">
 
     {{-- ══════════════════════════════════════════

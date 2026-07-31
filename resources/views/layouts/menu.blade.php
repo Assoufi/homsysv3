@@ -1,5 +1,5 @@
 <header id="homsys-header" class="homsys-header-one">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row align-items-center">
             <!-- Logo -->
             <div class="col-md-2 col-6">

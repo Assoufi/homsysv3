@@ -126,5 +126,5 @@ Route::get('/logins', function () {
         return redirect('/admin/index');
     }
     return view('auth.login');
-});
+})->name('login');
 

@@ -1,3 +1,12 @@
+<style>
+    .homsys-banner-caption .container {
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+</style>
+
 <div class="homsys-banner homsys-typo-wrap"> <span class="homsys-banner-transparent"></span>
 
     <div class="homsys-banner-caption">

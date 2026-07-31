@@ -1,34 +1,294 @@
 <div>
+<style>
+    /* Aligné sur le design index.blade (bleu #007bff) */
+    .lw-filter-panel {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .lw-filter-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    .lw-filter-header h3 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        color: #2c3e50;
+    }
+    .lw-badge-count {
+        display: inline-block;
+        background: #007bff;
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 12px;
+        margin-left: 4px;
+        vertical-align: middle;
+    }
+    .lw-filter-group {
+        margin-bottom: 16px;
+    }
+    .lw-filter-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: #475569;
+        margin-bottom: 6px;
+    }
+    .lw-filter-group label i {
+        color: #007bff;
+        margin-right: 3px;
+    }
+    .lw-input {
+        border: 1px solid #e2e8f0;
+        border-radius: 5px;
+        color: #2c3e50;
+    }
+    .lw-input:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.15rem rgba(0,123,255,0.15);
+    }
+    .lw-type-filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .lw-type-btn {
+        border-radius: 20px;
+        font-size: 12px;
+        padding: 5px 12px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        color: #475569;
+        transition: all 0.2s ease;
+    }
+    .lw-type-btn:hover {
+        border-color: #007bff;
+        color: #007bff;
+        background: #e8f1ff;
+    }
+    .lw-type-btn--active {
+        background: #007bff !important;
+        border-color: #007bff !important;
+        color: #fff !important;
+    }
+    .lw-type-count {
+        display: inline-block;
+        background: rgba(0,0,0,0.08);
+        font-size: 10px;
+        padding: 1px 6px;
+        border-radius: 10px;
+        margin-left: 3px;
+    }
+    .lw-type-btn--active .lw-type-count {
+        background: rgba(255,255,255,0.25);
+    }
+    .lw-listing-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    .lw-listing-header h4 {
+        font-weight: 700;
+        color: #2c3e50;
+        font-size: 1.05rem;
+        margin: 0;
+    }
+    .lw-btn-outline {
+        background: #fff;
+        color: #007bff;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        font-weight: 600;
+    }
+    .lw-btn-outline:hover,
+    .lw-btn-outline:focus {
+        background: #007bff;
+        color: #fff;
+    }
+    .home-offer.lw-job-card {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 18px;
+        margin-bottom: 0;
+        text-decoration: none !important;
+        transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+        background: #fff;
+    }
+    .home-offer.lw-job-card:hover {
+        border-color: #bfd8ff;
+        box-shadow: 0 6px 16px rgba(0,123,255,0.1);
+        transform: translateY(-2px);
+    }
+    .lw-job-card__top {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+    }
+    .home-offer-type {
+        display: inline-block;
+        background: #e8f1ff;
+        color: #007bff;
+        font-weight: 700;
+        font-size: 0.75rem;
+        padding: 4px 10px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+    .lw-badge-new {
+        display: inline-block;
+        background: #d4edda;
+        color: #155724;
+        font-size: 0.75rem;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 4px;
+    }
+    .home-offer.lw-job-card h4 {
+        margin: 0 0 10px;
+        font-weight: 700;
+        color: #2c3e50;
+        font-size: 1.05rem;
+        line-height: 1.4;
+    }
+    .home-offer.lw-job-card:hover h4 {
+        color: #007bff;
+    }
+    .home-offer-meta {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 12px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 14px;
+        color: #64748b;
+        font-size: 0.88rem;
+    }
+    .home-offer-meta li i {
+        color: #007bff;
+        margin-right: 4px;
+    }
+    .lw-job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 12px;
+    }
+    .lw-tag {
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 4px;
+        border: 1px solid #e2e8f0;
+    }
+    .lw-job-card__footer {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 12px;
+        border-top: 1px solid #e2e8f0;
+        font-size: 0.85rem;
+    }
+    .lw-link-more {
+        color: #007bff;
+        font-weight: 700;
+        font-size: 0.85rem;
+    }
+    .home-offer.lw-job-card:hover .lw-link-more {
+        text-decoration: underline;
+    }
+    .lw-empty-state {
+        text-align: center;
+        color: #64748b;
+        padding: 40px 16px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+    }
+    .lw-empty-state h4 {
+        color: #2c3e50;
+        font-weight: 700;
+        margin: 0 0 8px;
+    }
+    .lw-empty-state p {
+        margin: 0;
+        font-size: 0.95rem;
+    }
+    .btn-submit-blue {
+        background-color: #007bff !important;
+        border-color: #007bff !important;
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        padding: 10px 20px !important;
+        border-radius: 5px !important;
+        text-decoration: none !important;
+        display: inline-block !important;
+        border: none;
+        transition: all 0.2s ease;
+    }
+    .btn-submit-blue:hover {
+        background-color: #0056b3 !important;
+        border-color: #004085 !important;
+        color: #ffffff !important;
+    }
+    .dropdown-item.active {
+        background-color: #e8f1ff;
+        color: #007bff;
+    }
+    @media (max-width: 767px) {
+        .lw-filter-panel {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+
     <div class="row">
         {{-- Sidebar Filters --}}
         <aside class="col-lg-3 col-md-4 mb-4">
-            <div class="homsys-filter-panel">
-                <div class="homsys-filter-header">
+            <div class="lw-filter-panel">
+                <div class="lw-filter-header">
                     <h3><i class="fa fa-filter"></i> Filtres
                         @if($activeFilterCount > 0)
-                            <span class="badge homsys-bgcolor" style="font-size:12px;">{{ $activeFilterCount }}</span>
+                            <span class="lw-badge-count">{{ $activeFilterCount }}</span>
                         @endif
                     </h3>
                     @if($activeFilterCount > 0)
-                        <button wire:click="resetFilters" class="btn btn-sm btn-link text-danger p-0">
+                        <button wire:click="resetFilters" type="button" class="btn btn-sm btn-link text-danger p-0">
                             <i class="fa fa-times"></i> Tout effacer
                         </button>
                     @endif
                 </div>
 
-                {{-- Keyword Search --}}
-                <div class="homsys-filter-group">
+                <div class="lw-filter-group">
                     <label><i class="fa fa-search"></i> Recherche</label>
                     <input type="text" wire:model.live.debounce.300ms="keyword"
-                           class="form-control form-control-sm"
+                           class="form-control form-control-sm lw-input"
                            placeholder="Titre, compétences, poste...">
                 </div>
 
-                {{-- City --}}
-                <div class="homsys-filter-group">
+                <div class="lw-filter-group">
                     <label><i class="fa fa-map-marker"></i> Ville</label>
                     <input type="text" wire:model.live.debounce.300ms="ville"
-                           class="form-control form-control-sm"
+                           class="form-control form-control-sm lw-input"
                            placeholder="Toutes les villes"
                            list="villes-list">
                     <datalist id="villes-list">
@@ -38,21 +298,20 @@
                     </datalist>
                 </div>
 
-                {{-- Contract Type --}}
-                <div class="homsys-filter-group">
+                <div class="lw-filter-group">
                     <label><i class="fa fa-briefcase"></i> Type de contrat</label>
-                    <div class="homsys-type-filters">
+                    <div class="lw-type-filters">
                         @php
                             $types = ['Freelance', 'CDI', 'CDD', 'Stage'];
                             $typeIcons = ['Freelance' => 'fa-laptop', 'CDI' => 'fa-building', 'CDD' => 'fa-calendar-check-o', 'Stage' => 'fa-graduation-cap'];
                         @endphp
                         @foreach($types as $t)
                             <button type="button"
-                                    class="btn btn-sm {{ $type === $t ? 'btn-warning' : 'btn-outline-secondary' }} homsys-type-btn"
+                                    class="btn btn-sm lw-type-btn {{ $type === $t ? 'lw-type-btn--active' : '' }}"
                                     wire:click="$set('type', '{{ $type === $t ? '' : $t }}')">
                                 <i class="fa {{ $typeIcons[$t] }}"></i> {{ $t }}
                                 @if(isset($typeCounts[$t]))
-                                    <span class="badge badge-pill {{ $type === $t ? 'badge-light' : 'badge-secondary' }}">{{ $typeCounts[$t] }}</span>
+                                    <span class="lw-type-count">{{ $typeCounts[$t] }}</span>
                                 @endif
                             </button>
                         @endforeach
@@ -63,12 +322,12 @@
 
         {{-- Job Listings --}}
         <div class="col-lg-9 col-md-8">
-            <div class="homsys-listing-header d-flex justify-content-between align-items-center mb-3">
-                <h4 class="mb-0">
+            <div class="lw-listing-header">
+                <h4>
                     {{ $offres->total() }} {{ Str::plural('offre', $offres->total()) }} trouvée{{ $offres->total() > 1 ? 's' : '' }}
                 </h4>
                 <div class="dropdown">
-                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown">
+                    <button class="btn btn-sm lw-btn-outline dropdown-toggle" type="button" data-toggle="dropdown">
                         <i class="fa fa-sort"></i> Trier par
                     </button>
                     <div class="dropdown-menu dropdown-menu-right">
@@ -89,52 +348,45 @@
                 <div class="row">
                     @php $now = \Carbon\Carbon::now(); @endphp
                     @foreach($offres as $offre)
-                        <div class="col-lg-6 col-xl-4 mb-4">
-                            <article class="homsys-job-card">
-                                <div class="homsys-job-card__header">
-                                    <span class="homsys-job-card__type badge homsys-badge-type">{{ $offre->type_offre }}</span>
+                        <div class="col-lg-6 col-xl-4 mb-3">
+                            <a class="home-offer lw-job-card" href="{{ url('offres', $offre->id_offre . '-' . Str::slug($offre->titre_offre)) }}">
+                                <div class="lw-job-card__top">
+                                    <span class="home-offer-type">{{ $offre->type_offre }}</span>
                                     @if($now->diff($offre->updated_at)->days < 8)
-                                        <span class="homsys-job-card__new badge badge-success">Nouveau</span>
+                                        <span class="lw-badge-new">Nouveau</span>
                                     @endif
                                 </div>
-                                <h5 class="homsys-job-card__title">
-                                    <a href="{{ url('offres', $offre->id_offre . '-' . Str::slug($offre->titre_offre)) }}">
-                                        {{ $offre->titre_offre }}
-                                    </a>
-                                </h5>
-                                <div class="homsys-job-card__meta">
+                                <h4>{{ $offre->titre_offre }}</h4>
+                                <ul class="home-offer-meta">
                                     @if(!empty($offre->ville_offre))
-                                        <span><i class="fa fa-map-marker"></i> {{ $offre->ville_offre }}</span>
+                                        <li><i class="fa fa-map-marker"></i> {{ $offre->ville_offre }}</li>
                                     @endif
                                     @if(!empty($offre->duree))
-                                        <span><i class="fa fa-clock-o"></i> {{ $offre->duree }}</span>
+                                        <li><i class="fa fa-clock-o"></i> {{ $offre->duree }}</li>
                                     @endif
                                     @if(!empty($offre->experience))
-                                        <span><i class="fa fa-line-chart"></i> {{ $offre->experience }} ans</span>
+                                        <li><i class="fa fa-line-chart"></i> {{ $offre->experience }} ans</li>
                                     @endif
-                                </div>
+                                </ul>
                                 @if(!empty($offre->competences))
-                                    <div class="homsys-job-card__tags">
+                                    <div class="lw-job-tags">
                                         @php
                                             $raw = strip_tags($offre->competences);
                                             $tags = array_slice(array_filter(array_map('trim', explode("\n", $raw))), 0, 4);
                                         @endphp
                                         @foreach($tags as $tag)
-                                            <span class="homsys-tag">{{ $tag }}</span>
+                                            <span class="lw-tag">{{ $tag }}</span>
                                         @endforeach
                                     </div>
                                 @endif
-                                <div class="homsys-job-card__footer">
+                                <div class="lw-job-card__footer">
                                     <small class="text-muted">
                                         <i class="fa fa-calendar"></i>
-                                        Mis à jour le {{ $offre->updated_at->format('d/m/Y') }}
+                                        {{ $offre->updated_at->format('d/m/Y') }}
                                     </small>
-                                    <a href="{{ url('offres', $offre->id_offre . '-' . Str::slug($offre->titre_offre)) }}"
-                                       class="btn btn-sm homsys-bgcolor text-white">
-                                        Voir <i class="fa fa-arrow-right"></i>
-                                    </a>
+                                    <span class="lw-link-more">Voir <i class="fa fa-arrow-right"></i></span>
                                 </div>
-                            </article>
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -143,11 +395,11 @@
                     {{ $offres->withQueryString()->links() }}
                 </div>
             @else
-                <div class="homsys-empty-state text-center py-5">
-                    <i class="fa fa-search fa-4x text-muted mb-3" style="opacity:0.3;"></i>
-                    <h4 class="text-muted">Aucune offre trouvée</h4>
-                    <p class="text-muted">Essayez d'élargir vos critères de recherche ou réinitialisez les filtres.</p>
-                    <button wire:click="resetFilters" class="btn homsys-bgcolor text-white mt-2">
+                <div class="lw-empty-state">
+                    <i class="fa fa-search fa-3x" style="color:#94a3b8; margin-bottom:12px;"></i>
+                    <h4>Aucune offre trouvée</h4>
+                    <p>Essayez d'élargir vos critères de recherche ou réinitialisez les filtres.</p>
+                    <button wire:click="resetFilters" type="button" class="btn btn-submit-blue mt-2">
                         <i class="fa fa-refresh"></i> Réinitialiser les filtres
                     </button>
                 </div>
@@ -155,143 +407,3 @@
         </div>
     </div>
 </div>
-
-@push('styles')
-<style>
-    .homsys-filter-panel {
-        background: #fff;
-        border: 1px solid #e9ecef;
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    .homsys-filter-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 16px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid #eee;
-    }
-    .homsys-filter-header h3 {
-        margin: 0;
-        font-size: 16px;
-        font-weight: 700;
-        color: #333;
-    }
-    .homsys-filter-group {
-        margin-bottom: 16px;
-    }
-    .homsys-filter-group label {
-        display: block;
-        font-size: 13px;
-        font-weight: 600;
-        color: #555;
-        margin-bottom: 6px;
-    }
-    .homsys-type-filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-    }
-    .homsys-type-btn {
-        border-radius: 20px;
-        font-size: 12px;
-        padding: 4px 12px;
-        transition: all 0.2s;
-    }
-    .homsys-type-btn .badge {
-        margin-left: 4px;
-        font-size: 10px;
-    }
-    .homsys-job-card {
-        background: #fff;
-        border: 1px solid #e9ecef;
-        border-radius: 8px;
-        padding: 18px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        transition: box-shadow 0.2s, border-color 0.2s;
-    }
-    .homsys-job-card:hover {
-        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-        border-color: #D79A10;
-    }
-    .homsys-job-card__header {
-        display: flex;
-        gap: 6px;
-        margin-bottom: 10px;
-    }
-    .homsys-badge-type {
-        background-color: #f0f0f0;
-        color: #555;
-        font-size: 11px;
-        font-weight: 600;
-        padding: 3px 10px;
-        border-radius: 12px;
-    }
-    .homsys-job-card__new {
-        font-size: 11px;
-        padding: 3px 8px;
-        border-radius: 12px;
-    }
-    .homsys-job-card__title {
-        font-size: 16px;
-        font-weight: 700;
-        margin: 0 0 10px 0;
-        line-height: 1.3;
-    }
-    .homsys-job-card__title a {
-        color: #222;
-        text-decoration: none;
-    }
-    .homsys-job-card__title a:hover {
-        color: #D79A10;
-    }
-    .homsys-job-card__meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 10px;
-        font-size: 13px;
-        color: #777;
-    }
-    .homsys-job-card__meta i {
-        margin-right: 3px;
-        color: #D79A10;
-    }
-    .homsys-job-card__tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 4px;
-        margin-bottom: 12px;
-    }
-    .homsys-tag {
-        background: #f7f7f7;
-        color: #666;
-        font-size: 11px;
-        padding: 2px 8px;
-        border-radius: 4px;
-        border: 1px solid #eee;
-    }
-    .homsys-job-card__footer {
-        margin-top: auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 12px;
-        border-top: 1px solid #f0f0f0;
-    }
-    .homsys-empty-state {
-        background: #fafafa;
-        border-radius: 8px;
-    }
-
-    @media (max-width: 767px) {
-        .homsys-filter-panel {
-            margin-bottom: 20px;
-        }
-    }
-</style>
-@endpush
