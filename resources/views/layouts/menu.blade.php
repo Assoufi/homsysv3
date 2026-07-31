@@ -68,10 +68,6 @@
                             <a href="{{ url('mails/contactus') }}" role="menuitem">Contact</a>
                         </li>
                         @endif
-
-                       <!-- Authentication Links -->
-                        
-
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li class="menu-item menu-item-has-children" role="none">
