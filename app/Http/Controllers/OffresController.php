@@ -113,16 +113,16 @@ class OffresController extends Controller
     }
 
 
-    public function store(\Illuminate\Http\Request $request)
+    public function store(Request $request)
     {
-        $validator = Validator::make(Request::all(), [
+        $validator = Validator::make($request->all(), [
             'titre_offre' => 'required|min:5',
             'ville_offre' => 'required',
         ]);
         if ($validator->fails()) {
-            return redirect()->back()->withInput(Request::except('_token'))->withErrors($validator);
+            return redirect()->back()->withInput($request->except('_token'))->withErrors($validator);
         }
-        Offre::create(Request::all());
+        Offre::create($request->all());
         return redirect('offres')->withSuccess(['Offre créee']);
     }
 
@@ -139,32 +139,24 @@ class OffresController extends Controller
 
 
 
-    public function update($id)
+    public function update(Request $request, $id)
     {
-
         $user = Auth::user();
 
         if (empty($user) || !$user->hasRole('admin')) {
-
             return redirect('logins');
-
         }
 
         $offre = Offre::where('id_offre', $id)->first();
 
-        $offre->update(Request::all());
+        $offre->update($request->all());
 
-        if (Request::get('exp_offre') !== "1") {         
+        if ($request->get('exp_offre') !== "1") {
             $offre->exp_offre = 0;
             $offre->save();
         }
 
-        $meta = ['title' => 'Modification ' . $offre->titre_offre, 'description' => 'Modification ' . $offre->titre_offre, 'created_at' => Carbon::now()];
-
         return redirect('offres')->withSuccess(['Offre modifiée']);
-
-
-
     }
 
 
